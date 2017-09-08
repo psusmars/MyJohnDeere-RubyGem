@@ -4,6 +4,9 @@ require 'rbconfig'
 require 'base64'
 require 'oauth'
 
+# Errors
+require 'myjohndeere/errors'
+
 # Version
 require 'myjohndeere/version'
 
