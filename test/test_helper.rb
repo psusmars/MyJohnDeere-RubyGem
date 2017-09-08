@@ -13,6 +13,13 @@ class Minitest::Test
   #
   # API_FIXTURES = APIFixtures.new
 
+  def setup
+    MyJohnDeere.configure do |config|
+      config.app_id = "Dontcare"
+      config.shared_secret = "somesecret"
+    end
+  end
+
   def teardown
     WebMock.reset!
   end

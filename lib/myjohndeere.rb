@@ -2,6 +2,7 @@ require 'net/http'
 require 'json'
 require 'rbconfig'
 require 'base64'
+require 'oauth'
 
 # Version
 require 'myjohndeere/version'
@@ -10,6 +11,10 @@ require 'myjohndeere/version'
 require 'myjohndeere/access_token'
 
 module MyJohnDeere
+  class << self
+    attr_accessor :configuration
+  end
+
   JSON_CONTENT_HEADER_VALUE = 'application/vnd.deere.axiom.v3+json'
   AUTHORIZE_URL = "https://my.deere.com/consentToUseOfData"
   DEFAULT_REQUEST_HEADER = { 'accept'=> JSON_CONTENT_HEADER_VALUE }
@@ -38,7 +43,15 @@ module MyJohnDeere
 
     def shared_secret
       if @shared_secret.nil? then
-        raise 
+        raise ConfigurationError.new('No shared_secret provided in configuration. ' \
+          'Please set this according to your Deere Developer app credentials.')
+      end
+    end
+
+    def app_id
+      if @app_id.nil? then
+        raise ConfigurationError.new('No app_id provided in configuration. ' \
+          'Please set this according to your Deere Developer app credentials.')
       end
     end
   end
