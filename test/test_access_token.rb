@@ -53,7 +53,7 @@ class TestAccessToken < Minitest::Test
     stub_request(:get, "https://sandboxapi.deere.com/platform/").
       to_return(status: 200, body: JSON.generate(expected_json), headers: {})
 
-    response = at.send_request(:get, "/")
+    response = at.execute_request(:get, "/")
     assert_equal 200, response.http_status
     assert_equal expected_json.to_json, response.data.to_json
   end

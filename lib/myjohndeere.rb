@@ -16,6 +16,9 @@ require 'myjohndeere/requestable'
 require 'myjohndeere/response'
 require 'myjohndeere/access_token'
 
+# API Objects
+require 'myjohndeere/organization'
+
 module MyJohnDeere
   class << self
     attr_accessor :configuration

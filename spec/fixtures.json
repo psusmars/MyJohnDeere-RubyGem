@@ -73,5 +73,31 @@
           "uri":"https://api.soa-proxy.deere.com/platform/notificationEvents"
         }
       ]
+    },
+    "organization" : {
+       "links": [
+          {
+             "rel": "self",
+             "uri": "https://sandboxapi.deere.com/platform/organizations/1234"
+          },
+          {
+             "rel": "machines",
+             "uri": "https://sandboxapi.deere.com/platform/organizations/1234/machines"
+          },
+          {
+             "rel": "wdtCapableMachines",
+             "uri": "https://sandboxapi.deere.com/platform/organizations/1234/machines?capability=wdt"
+          },
+          {
+             "rel": "addresses",
+             "uri": "https://sandboxapi.deere.com/platform/organizations/1234/addresses"
+          }
+       ],
+       "id": "1234",
+       "name": "Smith Farms",
+       "type": "customer",
+       "addresses": [],
+       "partnerships": [],
+       "member": true
     }
 }

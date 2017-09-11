@@ -45,7 +45,7 @@ module MyJohnDeere
       end
     end
 
-    def send_request(method, path, options = {})
+    def execute_request(method, path, options = {})
       path = "/#{path}" if not path.start_with?("/")
       options = {
         body: "",
