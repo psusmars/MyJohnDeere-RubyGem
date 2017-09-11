@@ -17,6 +17,7 @@ class Minitest::Test
     MyJohnDeere.configure do |config|
       config.app_id = "Dontcare"
       config.shared_secret = "somesecret"
+      config.environment = :sandbox
     end
   end
 
