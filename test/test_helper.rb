@@ -24,4 +24,11 @@ class Minitest::Test
   def teardown
     WebMock.reset!
   end
+
+  def default_access_token
+    MyJohnDeere::AccessToken.new(
+      oauth_access_token_token: "1Of2eWDVM2x90j1kjxVgxlz091kjmnndsa0912FYwz7ZxlVgPcPmFGb1RtBWLXGVw3k",
+      oauth_access_token_secret: "2f05ab26-1879-4bfe-9129-b9b0144d1610",
+    )
+  end
 end
