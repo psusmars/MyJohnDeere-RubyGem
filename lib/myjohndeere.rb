@@ -61,6 +61,7 @@ module MyJohnDeere
         raise ConfigurationError.new('No shared_secret provided in configuration. ' \
           'Please set this according to your Deere Developer app credentials.')
       end
+      return @shared_secret
     end
 
     def app_id
@@ -68,6 +69,7 @@ module MyJohnDeere
         raise ConfigurationError.new('No app_id provided in configuration. ' \
           'Please set this according to your Deere Developer app credentials.')
       end
+      return @app_id
     end
   end
 end

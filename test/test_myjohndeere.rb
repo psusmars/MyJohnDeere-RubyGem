@@ -6,10 +6,15 @@ class TestMyJohnDeere < Minitest::Test
     assert_raises MyJohnDeere::ConfigurationError do
       MyJohnDeere.configuration.app_id
     end
+    MyJohnDeere.configuration.app_id = "blah"
+    assert_equal "blah", MyJohnDeere.configuration.app_id
 
     assert_raises MyJohnDeere::ConfigurationError do
       MyJohnDeere.configuration.shared_secret
     end
+
+    MyJohnDeere.configuration.shared_secret = "blah"
+    assert_equal "blah", MyJohnDeere.configuration.shared_secret
   end
 
   def test_endpoint_setting
