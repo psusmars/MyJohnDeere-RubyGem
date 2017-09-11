@@ -84,7 +84,7 @@ module MyJohnDeere
         # permit the body through
         response = self.oauth_access_token.send(method, path, options[:body], options[:headers])
       end
-      MyJohnDeere.log.info("JohnDeere token response: #{response.body}")
+      MyJohnDeere.logger.info("JohnDeere token response: #{response.body}")
       # if response.code == "401"
       #   self.notify_on_destroy = true
       #   # we are no longer authorized

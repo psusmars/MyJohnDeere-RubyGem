@@ -36,13 +36,13 @@ class TestMyJohnDeere < Minitest::Test
   end
 
   def test_logger_setup
-    assert MyJohnDeere.log.is_a?(Logger)
-    assert_equal Logger::FATAL, MyJohnDeere.log.level
+    assert MyJohnDeere.logger.is_a?(Logger)
+    assert_equal Logger::FATAL, MyJohnDeere.logger.level
 
     MyJohnDeere.configure do |config|
       config.log_level = :warn
     end
 
-    assert_equal Logger::WARN, MyJohnDeere.log.level
+    assert_equal Logger::WARN, MyJohnDeere.logger.level
   end
 end

@@ -18,16 +18,16 @@ require 'myjohndeere/access_token'
 module MyJohnDeere
   class << self
     attr_accessor :configuration
-    def set_log()
-      @log ||= Logger.new(STDOUT)
-      @log.level = Logger.const_get(self.configuration.log_level.to_s.upcase)
+    def set_logger()
+      @logger ||= Logger.new(STDOUT)
+      @logger.level = Logger.const_get(self.configuration.log_level.to_s.upcase)
     end
 
-    def log
-      if @log.nil? then
-        set_log()
+    def logger
+      if @logger.nil? then
+        set_logger()
       end
-      @log
+      @logger
     end
   end
 
@@ -47,7 +47,7 @@ module MyJohnDeere
   def self.configure
     self.configuration ||= Configuration.new
     yield(configuration)
-    set_log()
+    set_logger()
   end
 
   class Configuration
