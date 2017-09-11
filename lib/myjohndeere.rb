@@ -12,6 +12,7 @@ require 'myjohndeere/errors'
 require 'myjohndeere/version'
 
 # API Support Classes
+require 'myjohndeere/response'
 require 'myjohndeere/access_token'
 
 module MyJohnDeere

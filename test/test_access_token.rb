@@ -1,6 +1,13 @@
 require File.expand_path('../test_helper', __FILE__)
 
 class TestAccessToken < Minitest::Test
+  def default_access_token
+    MyJohnDeere::AccessToken.new(
+      oauth_access_token_token: "1Of2eWDVM2x90j1kjxVgxlz091kjmnndsa0912FYwz7ZxlVgPcPmFGb1RtBWLXGVw3k",
+      oauth_access_token_secret: "2f05ab26-1879-4bfe-9129-b9b0144d1610",
+    )
+  end
+
   def test_get_request_token
     expected_secret = "v8gWA1cxT1Gfx1nkxi01R8xy6uHbMLw/9cMzYTl9bqqTPJWQkRpZr5WmMQA0S4clamix2tGMD5rlfvXis7DxGKcxA6ZIMGXLK1mMOegnM78="
     expected_token = "12ac3ff0-a13e-4c61-83f4-5cf9bd532341"
@@ -43,8 +50,18 @@ class TestAccessToken < Minitest::Test
       oauth_access_token_token: expected_token,
       oauth_access_token_secret: expected_secret,
     )
-
     assert_equal expected_token, at.oauth_access_token.token
     assert_equal expected_secret, at.oauth_access_token.secret
+  end
+
+  def test_send_get_request
+    at = default_access_token()
+    expected_json = API_FIXTURES.fetch(:api_catalog)
+    stub_request(:get, "https://sandboxapi.deere.com/platform/").
+      to_return(status: 200, body: JSON.generate(expected_json), headers: {})
+
+    response = at.send_request(:get, "/")
+    assert_equal 200, response.http_status
+    assert_equal expected_json, response.data
   end
 end
