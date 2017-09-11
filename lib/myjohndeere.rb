@@ -3,6 +3,7 @@ require 'json'
 require 'rbconfig'
 require 'base64'
 require 'oauth'
+require 'logger'
 
 # Errors
 require 'myjohndeere/errors'
@@ -16,6 +17,17 @@ require 'myjohndeere/access_token'
 module MyJohnDeere
   class << self
     attr_accessor :configuration
+    def set_log()
+      @log ||= Logger.new(STDOUT)
+      @log.level = Logger.const_get(self.configuration.log_level.to_s.upcase)
+    end
+
+    def log
+      if @log.nil? then
+        set_log()
+      end
+      @log
+    end
   end
 
   JSON_CONTENT_HEADER_VALUE = 'application/vnd.deere.axiom.v3+json'
@@ -34,12 +46,22 @@ module MyJohnDeere
   def self.configure
     self.configuration ||= Configuration.new
     yield(configuration)
+    set_log()
   end
 
   class Configuration
     attr_accessor :endpoint
     attr_writer :shared_secret, :app_id
     attr_reader :environment
+
+    def log_level=(val)
+      @log_level = val
+    end
+
+    def log_level
+      @log_level ||= :fatal
+      return @log_level
+    end
 
     def environment=(val)
       @environment = val.to_sym

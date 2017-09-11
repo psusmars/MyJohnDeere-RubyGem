@@ -34,4 +34,15 @@ class TestMyJohnDeere < Minitest::Test
     assert_equal :production, MyJohnDeere.configuration.environment
     assert_equal MyJohnDeere::ENDPOINTS[:production], MyJohnDeere.configuration.endpoint
   end
+
+  def test_logger_setup
+    assert MyJohnDeere.log.is_a?(Logger)
+    assert_equal Logger::FATAL, MyJohnDeere.log.level
+
+    MyJohnDeere.configure do |config|
+      config.log_level = :warn
+    end
+
+    assert_equal Logger::WARN, MyJohnDeere.log.level
+  end
 end
