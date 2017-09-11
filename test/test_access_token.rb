@@ -62,6 +62,6 @@ class TestAccessToken < Minitest::Test
 
     response = at.send_request(:get, "/")
     assert_equal 200, response.http_status
-    assert_equal expected_json, response.data
+    assert_equal expected_json.to_json, response.data.to_json
   end
 end

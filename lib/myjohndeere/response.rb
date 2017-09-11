@@ -14,7 +14,7 @@ module MyJohnDeere
       self.http_body = response.body
       if response.body then
         begin
-          self.data = JSON.parse(response.body, symbolize_names: true)
+          self.data = JSON.parse(response.body)
         rescue JSON::ParserError
           self.data = nil
         end
