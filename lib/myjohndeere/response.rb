@@ -23,5 +23,9 @@ module MyJohnDeere
       end
       self.http_status = response.code.to_i
     end
+
+    def code
+      return http_status
+    end
   end
 end
