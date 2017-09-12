@@ -13,6 +13,7 @@ class TestOrganization < Minitest::Test
     assert_equal "Smith Farms", organization.name
     assert_equal "customer", organization.type
     assert_equal true, organization.user_is_member
+    assert_equal FIXTURE[:links].length, organization.links.length
     assert organization.access_token
   end
 end
