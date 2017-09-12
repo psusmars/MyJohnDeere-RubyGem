@@ -12,6 +12,7 @@ require 'myjohndeere/errors'
 require 'myjohndeere/version'
 
 # API Support Classes
+require 'myjohndeere/rest_methods'
 require 'myjohndeere/requestable'
 require 'myjohndeere/util'
 require 'myjohndeere/response'

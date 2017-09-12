@@ -1,5 +1,6 @@
 module MyJohnDeere
   class SingleResource < Requestable
+    include RESTMethods
     attr_accessor :id, :name, :links, :deleted
 
     def initialize(json_object, access_token = nil)

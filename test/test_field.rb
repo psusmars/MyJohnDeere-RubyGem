@@ -10,7 +10,7 @@ class TestField < Minitest::Test
       to_return(status: 200, body: FIXTURE.to_json)
 
     field = MyJohnDeere::Field.retrieve(default_access_token, 
-      expected_organization_id, expected_field_id)
+      expected_field_id, organization_id: expected_organization_id)
 
     assert_equal expected_field_id, field.id
     assert_equal expected_organization_id, field.organization_id

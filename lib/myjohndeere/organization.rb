@@ -1,6 +1,6 @@
 module MyJohnDeere
   class Organization < SingleResource
-    PATH = "organizations"
+    self.resource_base_path = "organizations"
     attr_accessor :user_is_member, :type, :deleted
 
     def initialize(json_object, access_token = nil)
@@ -10,27 +10,5 @@ module MyJohnDeere
       super(json_object, access_token)
     end
 
-    def self.retrieve(access_token, id)
-      response = access_token.execute_request(:get, "#{PATH}/#{id}")
-
-      return new(response.data, access_token)
-    end
-
-    def self.list(access_token, count: 10, start: 0, etag: "")
-      response = access_token.execute_request(:get, "#{PATH}", 
-        body: {start: start, count: count},
-        etag: etag
-      )
-
-      return_data = response.data["values"]
-      return ListObject.new(
-        self,
-        access_token,
-        return_data.collect { |i| Organization.new(i, access_token) },
-        total: response.data["total"],
-        count: count,
-        start: start,
-        etag: response.http_headers[MyJohnDeere::ETAG_HEADER_KEY])
-    end
   end
 end
