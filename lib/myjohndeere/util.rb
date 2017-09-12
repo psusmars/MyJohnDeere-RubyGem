@@ -28,11 +28,13 @@ module MyJohnDeere
         if body.is_a?(Hash) then
           uri = URI.parse(path)
           new_query_ar = URI.decode_www_form(uri.query || '')
+          
           # For reasons beyond me, these are specified as non-parameters
-          special_parameters = {
-            start: body.delete(:start), 
-            count: body.delete(:count)
-          }
+          special_parameters = {}
+          SPECIAL_BODY_PARAMETERS.each do |sbp|
+            special_parameters[sbp] = body.delete(sbp)
+          end
+
           body.each do |key, val|
             new_query_ar << [key.to_s, val.to_s]
           end

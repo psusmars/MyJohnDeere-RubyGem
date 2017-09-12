@@ -53,6 +53,7 @@ module MyJohnDeere
   }
   ETAG_HEADER_KEY = "X-Deere-Signature"
   REQUEST_METHODS_TO_PUT_PARAMS_IN_URL = [:get, :delete, :head]
+  SPECIAL_BODY_PARAMETERS = [:start, :count]
 
   def self.configure
     self.configuration ||= Configuration.new

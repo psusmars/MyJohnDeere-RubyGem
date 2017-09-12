@@ -39,6 +39,8 @@ class TestUtil < Minitest::Test
 
   def test_etag_with_blank_body
     path, headers, body = MyJohnDeere::Util.build_path_headers_and_body(:get, "test", etag: "", body: "")
+    assert path
+    assert body
     assert_equal({"accept"=>"application/vnd.deere.axiom.v3+json", "X-Deere-Signature"=>""}, headers)
   end
 

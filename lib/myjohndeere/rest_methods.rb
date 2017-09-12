@@ -7,15 +7,14 @@ module MyJohnDeere
       def list(access_token, options = {})
         validate_access_token(access_token)
         options = {count: 10, start: 0, etag: nil}.merge(options)
-
-        base_resources = {}
-        options.each do |key, val|
-          base_resources[key] = val if key.match(/_id\Z/)
+        options[:body] ||= {}
+        # The count and start are in this list,so move them into the body
+        SPECIAL_BODY_PARAMETERS.each do |sbp|
+          options[:body][sbp] = options[sbp]
         end
 
-        response = access_token.execute_request(:get, build_resouce_base_path(base_resources), 
-          body: {start: options[:start], count: options[:count]},
-          etag: options[:etag]
+        response = access_token.execute_request(:get, build_resouce_base_path!(options), 
+          options
         )
         return_data = response.data["values"]
         return ListObject.new(
@@ -29,18 +28,23 @@ module MyJohnDeere
         )
       end
 
-      def retrieve(access_token, id, base_resources={})
+      def retrieve(access_token, id, options={})
         validate_access_token(access_token)
         response = access_token.execute_request(:get, 
-          "#{build_resouce_base_path(base_resources)}/#{id}")
+          "#{build_resouce_base_path!(options)}/#{id}",
+          options)
 
         return new(response.data, access_token)
       end
 
-      def build_resouce_base_path(ids)
-        return self.resource_base_path if ids.nil? || ids.empty?
-        MyJohnDeere.logger.info("Building resource path: #{self.resource_base_path}, with ids: #{ids}")
-        return self.resource_base_path % ids
+      def build_resouce_base_path!(options)
+        base_resources = {}
+        options.each do |key, val|
+          base_resources[key] = options.delete(key) if key.match(/_id\Z/)
+        end
+        return self.resource_base_path if base_resources.nil? || base_resources.empty?
+        MyJohnDeere.logger.info("Building resource path: #{self.resource_base_path}, with ids: #{base_resources}")
+        return self.resource_base_path % base_resources
       end
 
       def validate_access_token(access_token)
