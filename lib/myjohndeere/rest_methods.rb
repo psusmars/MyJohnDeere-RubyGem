@@ -2,10 +2,19 @@ module MyJohnDeere
   module RESTMethods
     module ClassMethods
       attr_accessor :resource_base_path
-      def list(access_token, count: 10, start: 0, etag: "", base_resources: {})
+      # If the resource requires a base resource, specify it in the format of:
+      # <resource_singular_name_id>: <ID>
+      def list(access_token, options = {})
+        options = {count: 10, start: 0, etag: ""}.merge(options)
+
+        base_resources = {}
+        options.each do |key, val|
+          base_resources[key] = val if key.match(/_id\Z/)
+        end
+
         response = access_token.execute_request(:get, build_resouce_base_path(base_resources), 
-          body: {start: start, count: count},
-          etag: etag
+          body: {start: options[:start], count: options[:count]},
+          etag: options[:etag]
         )
         return_data = response.data["values"]
         return ListObject.new(
@@ -13,8 +22,8 @@ module MyJohnDeere
           access_token,
           return_data.collect { |i| self.new(i, access_token) },
           total: response.data["total"],
-          count: count,
-          start: start,
+          count: options[:count],
+          start: options[:start],
           etag: response.http_headers[MyJohnDeere::ETAG_HEADER_KEY])
       end
 

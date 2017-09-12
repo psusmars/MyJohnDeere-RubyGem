@@ -25,7 +25,7 @@ class TestOrganization < Minitest::Test
     organizations = MyJohnDeere::Organization.list(default_access_token, count: 1)
 
     assert_equal 1, organizations.data.length
-    assert organizations.data[0].is_a?(MyJohnDeere::Organization)
+    assert_equal MyJohnDeere::Organization, organizations.data[0].class
   end
 
   def test_fields()

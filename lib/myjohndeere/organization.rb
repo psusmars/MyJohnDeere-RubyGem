@@ -11,7 +11,7 @@ module MyJohnDeere
     end
 
     def fields
-      return MyJohnDeere::Field.list(self.access_token, base_resources: {organization_id: self.id})
+      return MyJohnDeere::Field.list(self.access_token, organization_id: self.id)
     end
   end
 end

@@ -103,6 +103,46 @@
           }
        ],
        "id": "MWUxZTExODZiMzg"
+    }, "fields" : {
+       "links": [
+          {
+             "rel": "self",
+             "uri": "https://sandboxapi.deere.com/platform/organizations/1234/fields"
+          }
+       ],
+       "total": 1,
+       "values": [
+          {
+             "name": "Nautilus",
+             "links": [
+                {
+                   "rel": "self",
+                   "uri": "https://sandboxapi.deere.com/platform/organizations/1234/fields/MWUxZTExODZiMzg"
+                },
+                {
+                   "rel": "boundaries",
+                   "uri": "https://sandboxapi.deere.com/platform/organizations/1234/fields/MWUxZTExODZiMzg/boundaries"
+                },
+                {
+                   "rel": "clients",
+                   "uri": "https://sandboxapi.deere.com/platform/organizations/1234/fields/MWUxZTExODZiMzg/clients"
+                },
+                {
+                   "rel": "farms",
+                   "uri": "https://sandboxapi.deere.com/platform/organizations/1234/fields/MWUxZTExODZiMzg/farms"
+                },
+                {
+                   "rel": "owningOrganization",
+                   "uri": "https://sandboxapi.deere.com/platform/organizations/1234"
+                },
+                {
+                   "rel": "activeBoundary",
+                   "uri": "https://sandboxapi.deere.com/platform/organizations/1234/boundaries/2Njg1OC03N"
+                }
+             ],
+             "id": "MWUxZTExODZiMzg"
+          }
+       ]
     },
     "organizations" : {
        "links": [
