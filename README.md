@@ -76,7 +76,7 @@ organizations.has_more?
 
 ## Listable Objects
 
-MyJohnDeere returns either pages of objects that will automatically be iterated through 10 at a time *or* you'll receive the entirety of the resource if you specify an etag token.
+MyJohnDeere returns either pages of objects that will automatically be iterated through 10 at a time *or* you'll receive the entirety of the resource if you specify an etag token. **The default behavior is for pagination.**
 
 **If using the paginated approach**: Use `more_pages?` on the listable object to see if there are more pages to be acquired by using `next_page!`. This will modify the `.start` and `.count` values on the list object. These automatically increase with each `next_page`.
 
