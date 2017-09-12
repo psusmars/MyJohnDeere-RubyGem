@@ -46,43 +46,16 @@ module MyJohnDeere
     end
 
     def execute_request(method, path, options = {})
-      path = "/#{path}" if not path.start_with?("/")
-      options = {
-        body: "",
-        etag: nil
-      }.merge(options)
-      if method == :post || method == :put then
-        options[:headers] ||= MyJohnDeere::DEFAULT_POST_HEADER
-        options[:headers]["Content-Length"] ||= options[:body].length.to_s
+      path, headers, body = Util.build_path_headers_and_body(method, path,
+        headers: options[:headers],
+        body: options[:body],
+        etag: options[:etag])
+      response =  nil
+      if REQUEST_METHODS_TO_PUT_PARAMS_IN_URL.include?(method)
+        response = self.oauth_access_token.send(method, path, headers)
       else
-        options[:headers] ||= MyJohnDeere::DEFAULT_REQUEST_HEADER
-      end
-      if !options[:etag].nil? then
-        # Pass an empty string to have it start
-        options[:headers][MyJohnDeere::ETAG_HEADER_KEY] = options[:etag]
-      end
-      response = nil
-      # in the case of following one of their paths, just clear out the base
-      path = path.sub(MyJohnDeere.configuration.endpoint, '')
-
-      # always trim platform from the beginning as we have that in our base
-      path = path.sub(/\A\/platform/, "")
-
-      if [:get, :delete, :head].include?(method)
-        # we'll only accept hashes for the body for now
-        if options[:body].is_a?(Hash)
-          uri = URI.parse(path)
-          new_query_ar = URI.decode_www_form(uri.query || '')
-          options[:body].each do |key, val|
-            new_query_ar << [key.to_s, val.to_s]
-          end
-          uri.query = URI.encode_www_form(new_query_ar)
-          path = uri.to_s
-        end
-        response = self.oauth_access_token.send(method, path, options[:headers])
-      else
-        # permit the body through
-        response = self.oauth_access_token.send(method, path, options[:body], options[:headers])
+        # permit the body through since it'll be in the 
+        response = self.oauth_access_token.send(method, path, body, headers)
       end
       MyJohnDeere.logger.info("JohnDeere token response: #{response.body}")
       # if response.code == "401"

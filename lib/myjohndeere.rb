@@ -13,6 +13,7 @@ require 'myjohndeere/version'
 
 # API Support Classes
 require 'myjohndeere/requestable'
+require 'myjohndeere/util'
 require 'myjohndeere/response'
 require 'myjohndeere/access_token'
 
@@ -46,7 +47,8 @@ module MyJohnDeere
     'accept'=> JSON_CONTENT_HEADER_VALUE,
     "Content-Type"=> JSON_CONTENT_HEADER_VALUE
   }
-  ETAG_HEADER_KEY = "x-deere-signature"
+  ETAG_HEADER_KEY = "X-Deere-Signature"
+  REQUEST_METHODS_TO_PUT_PARAMS_IN_URL = [:get, :delete, :head]
 
   def self.configure
     self.configuration ||= Configuration.new
