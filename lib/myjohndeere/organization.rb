@@ -1,7 +1,7 @@
 module MyJohnDeere
   class Organization < SingleResource
     PATH = "organizations"
-    attr_accessor :id, :name, :user_is_member, :type, :links, :deleted
+    attr_accessor :user_is_member, :type, :deleted
 
     def initialize(json_object, access_token = nil)
       # This will be either customer or dealer
