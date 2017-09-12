@@ -31,8 +31,8 @@ class TestAccessToken < Minitest::Test
       verifier_code: "blah"
     )
 
-    assert_equal expected_token, at.oauth_access_token.token
-    assert_equal expected_secret, at.oauth_access_token.secret
+    assert_equal expected_token, at.token
+    assert_equal expected_secret, at.secret
   end
 
   def test_initialize_access_token_with_access_token_options
@@ -43,8 +43,8 @@ class TestAccessToken < Minitest::Test
       oauth_access_token_token: expected_token,
       oauth_access_token_secret: expected_secret,
     )
-    assert_equal expected_token, at.oauth_access_token.token
-    assert_equal expected_secret, at.oauth_access_token.secret
+    assert_equal expected_token, at.token
+    assert_equal expected_secret, at.secret
   end
 
   def test_send_get_request

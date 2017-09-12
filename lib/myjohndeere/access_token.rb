@@ -45,6 +45,14 @@ module MyJohnDeere
       end
     end
 
+    def token
+      return oauth_access_token.nil? ? nil : oauth_access_token.token
+    end
+
+    def secret
+      return oauth_access_token.nil? ? nil : oauth_access_token.secret
+    end
+
     def execute_request(method, path, options = {})
       path, headers, body = Util.build_path_headers_and_body(method, path,
         headers: options[:headers],
