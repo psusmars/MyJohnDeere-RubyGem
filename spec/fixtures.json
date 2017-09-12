@@ -74,6 +74,66 @@
         }
       ]
     },
+    "organizations" : {
+       "links": [
+          {
+             "rel": "self",
+             "uri": "https://sandboxapi.deere.com/platform/organizations"
+          },
+          {
+             "rel": "nextPage",
+             "uri": "https://sandboxapi.deere.com/platform/organizations;start=10;count=10"
+          }
+       ],
+       "total": 27,
+       "values": [       {
+             "links": [
+                {
+                   "rel": "self",
+                   "uri": "https://sandboxapi.deere.com/platform/organizations/1234"
+                },
+                {
+                   "rel": "machines",
+                   "uri": "https://sandboxapi.deere.com/platform/organizations/1234/machines"
+                },
+                {
+                   "rel": "wdtCapableMachines",
+                   "uri": "https://sandboxapi.deere.com/platform/organizations/1234/machines?capability=wdt"
+                },
+                {
+                   "rel": "addresses",
+                   "uri": "https://sandboxapi.deere.com/platform/organizations/1234/addresses"
+                }
+             ],
+             "id": "1234",
+             "name": "Smith Farms",
+             "type": "customer",
+             "addresses": [],
+             "partnerships": [],
+             "member": true
+          }
+       ]
+    }, 
+    "deleted_organization" : {
+       "links": [
+          {
+             "rel": "self",
+             "uri": " https://sandboxapi.deere.com/platform/organizations/234578"
+          }
+       ],
+       "total": 1,
+       "values": [
+          {
+             "links": [
+                {
+                   "rel": "delete",
+                   "uri": " https://sandboxapi.deere.com/platform/organizations/234578"
+                }
+             ],
+             "id": "20201112"
+          }
+       ]
+    },
     "organization" : {
        "links": [
           {

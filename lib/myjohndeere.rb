@@ -16,6 +16,7 @@ require 'myjohndeere/requestable'
 require 'myjohndeere/util'
 require 'myjohndeere/response'
 require 'myjohndeere/access_token'
+require 'myjohndeere/list_object'
 
 # API Objects
 require 'myjohndeere/organization'
