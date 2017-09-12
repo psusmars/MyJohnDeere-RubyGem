@@ -1,17 +1,13 @@
 module MyJohnDeere
-  class Organization < Requestable
+  class Organization < SingleResource
     PATH = "organizations"
     attr_accessor :id, :name, :user_is_member, :type, :links, :deleted
 
     def initialize(json_object, access_token = nil)
-      self.id = json_object["id"]
-      self.name = json_object["name"]
       # This will be either customer or dealer
       self.type = json_object["type"]
       self.user_is_member = json_object["member"]
-      self.links = json_object["links"]
-      self.deleted = self.links.any? { |link_hash| link_hash["rel"] == "delete" }
-      super(access_token)
+      super(json_object, access_token)
     end
 
     def self.retrieve(access_token, id)

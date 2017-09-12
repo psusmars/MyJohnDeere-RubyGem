@@ -17,9 +17,11 @@ require 'myjohndeere/util'
 require 'myjohndeere/response'
 require 'myjohndeere/access_token'
 require 'myjohndeere/list_object'
+require 'myjohndeere/single_resource'
 
 # API Objects
 require 'myjohndeere/organization'
+require 'myjohndeere/field'
 
 module MyJohnDeere
   class << self
