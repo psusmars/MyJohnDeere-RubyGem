@@ -1,6 +1,6 @@
 # MyJohnDeere API Library
 
-The MyJohnDeere Ruby library provides convenient access to the MyJohnDeere API from applications written in the Ruby language. It includes a pre-defined set of classes for API resources that are available currently from the API. You will need to get access by going to the (JohnDeere Developer page)[https://developer.deere.com/#!welcome]. The interface utilizes OAUTH 1.0.
+The MyJohnDeere Ruby library provides convenient access to the MyJohnDeere API from applications written in the Ruby language. It includes a pre-defined set of classes for API resources that are available currently from the API. You will need to get access by going to the [JohnDeere Developer page](https://developer.deere.com/#!welcome). The interface utilizes OAUTH 1.0.
 
 ## Listable Objects
 
