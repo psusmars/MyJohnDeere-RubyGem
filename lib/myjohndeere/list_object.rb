@@ -21,8 +21,8 @@ module MyJohnDeere
       self.data.each(&blk)
     end
 
-    def next_page()
-      return false if !self.has_more?()
+    def next_page!()
+      return if !self.has_more?()
       new_list = @listable.list(self.access_token, 
         count: self.count, 
         start: self.start + self.count,

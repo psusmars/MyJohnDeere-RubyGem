@@ -37,12 +37,15 @@ class TestListObject < Minitest::Test
     stub_request(:get, /organizations;start=#{existing_data.count};count=#{existing_data.count}/).
       to_return(status: 200, body: test_json.to_json())
 
-    list.next_page()
+    list.next_page!()
 
     assert_equal 1, list.data.length
+    assert_equal existing_data.length, list.start
     assert_equal test_json["values"].first["id"], list.data.first.id
     assert !list.has_more?()
 
-    assert !list.next_page()
+    before_start = list.start
+    list.next_page!()
+    assert_equal before_start, list.start, "The start shouldn't have moved"
   end
 end
