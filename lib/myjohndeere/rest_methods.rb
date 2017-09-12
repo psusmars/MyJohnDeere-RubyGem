@@ -5,6 +5,7 @@ module MyJohnDeere
       # If the resource requires a base resource, specify it in the format of:
       # <resource_singular_name_id>: <ID>
       def list(access_token, options = {})
+        validate_access_token(access_token)
         options = {count: 10, start: 0, etag: ""}.merge(options)
 
         base_resources = {}
@@ -28,6 +29,7 @@ module MyJohnDeere
       end
 
       def retrieve(access_token, id, base_resources={})
+        validate_access_token(access_token)
         response = access_token.execute_request(:get, 
           "#{build_resouce_base_path(base_resources)}/#{id}")
 
@@ -38,6 +40,10 @@ module MyJohnDeere
         return self.resource_base_path if ids.nil? || ids.empty?
         MyJohnDeere.logger.info("Building resource path: #{self.resource_base_path}, with ids: #{ids}")
         return self.resource_base_path % ids
+      end
+
+      def validate_access_token(access_token)
+        raise ArgumentError.new("The first argument must be an #{AccessToken}") if !access_token.is_a?(AccessToken)
       end
     end
      
