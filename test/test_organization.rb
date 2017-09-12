@@ -27,4 +27,15 @@ class TestOrganization < Minitest::Test
     assert_equal 1, organizations.data.length
     assert organizations.data[0].is_a?(MyJohnDeere::Organization)
   end
+
+  def test_fields()
+    organization = MyJohnDeere::Organization.new(FIXTURE, default_access_token)
+
+    stub_request(:get, /organizations\/#{organization.id}\/fields/).
+      to_return(status: 200, body: API_FIXTURES["fields"].to_json)
+    fields = organization.fields
+
+    assert_equal MyJohnDeere::ListObject, fields.class
+    assert_equal MyJohnDeere::Field, fields.data[0].class
+  end
 end

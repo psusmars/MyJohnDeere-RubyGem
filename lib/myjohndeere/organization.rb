@@ -10,5 +10,8 @@ module MyJohnDeere
       super(json_object, access_token)
     end
 
+    def fields
+      return MyJohnDeere::Field.list(self.access_token, base_resources: {organization_id: self.id})
+    end
   end
 end
