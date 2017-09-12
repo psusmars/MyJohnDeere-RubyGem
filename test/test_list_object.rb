@@ -42,5 +42,7 @@ class TestListObject < Minitest::Test
     assert_equal 1, list.data.length
     assert_equal test_json[:values].first[:id], list.data.first.id
     assert !list.has_more?()
+
+    assert !list.next_page()
   end
 end
