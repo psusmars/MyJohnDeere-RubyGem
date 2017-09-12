@@ -6,7 +6,7 @@ module MyJohnDeere
       # <resource_singular_name_id>: <ID>
       def list(access_token, options = {})
         validate_access_token(access_token)
-        options = {count: 10, start: 0, etag: ""}.merge(options)
+        options = {count: 10, start: 0, etag: nil}.merge(options)
 
         base_resources = {}
         options.each do |key, val|
@@ -23,9 +23,10 @@ module MyJohnDeere
           access_token,
           return_data.collect { |i| self.new(i, access_token) },
           total: response.data["total"],
-          count: options[:count],
-          start: options[:start],
-          etag: response.http_headers[MyJohnDeere::ETAG_HEADER_KEY])
+          options: options.merge(
+            etag: response.http_headers[MyJohnDeere::ETAG_HEADER_KEY]
+          )
+        )
       end
 
       def retrieve(access_token, id, base_resources={})

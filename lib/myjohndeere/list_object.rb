@@ -1,17 +1,27 @@
 module MyJohnDeere
   class ListObject < Requestable
-    attr_accessor :count, :start
-    attr_reader :data, :listable, :etag, :total
+    OPTION_ATTRIBUTES = [:count, :start, :etag]
+    attr_reader :data, :listable, :total, :options
     include Enumerable
 
-    def initialize(listable, access_token, data, 
-      start:0, count: 10, etag: nil, total: nil)
+    OPTION_ATTRIBUTES.each do |attribute|
+      define_method("#{attribute}=") do |val|
+        options[attribute] = val
+      end
+      define_method(attribute) do
+        return options[attribute]
+      end    
+    end
+
+    def initialize(listable, access_token, data, total: nil,
+      options: {})
+      @options = options
+      self.start ||= 0
+      self.count ||= 10
+      self.etag ||= nil
       # Confirm object is listable? 
       @listable = listable
       @data = data
-      @start = start
-      @count = count
-      @etag = etag
       # Total is the total record count as specified by the john deere response
       @total = total || data.length
       super(access_token)
