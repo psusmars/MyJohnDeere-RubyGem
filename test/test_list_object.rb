@@ -29,10 +29,10 @@ class TestListObject < Minitest::Test
   end
 
   def test_get_next_page
-    test_json = API_FIXTURES[:organizations]
-    existing_data = (1..(test_json[:total]-1)).to_a
+    test_json = API_FIXTURES["organizations"]
+    existing_data = (1..(test_json["total"]-1)).to_a
     list = MyJohnDeere::ListObject.new(MyJohnDeere::Organization, default_access_token, 
-      existing_data, total: test_json[:total], start: 0, count: existing_data.length)
+      existing_data, total: test_json["total"], start: 0, count: existing_data.length)
     assert list.has_more?
     stub_request(:get, /organizations;start=#{existing_data.count};count=#{existing_data.count}/).
       to_return(status: 200, body: test_json.to_json())
@@ -40,7 +40,7 @@ class TestListObject < Minitest::Test
     list.next_page()
 
     assert_equal 1, list.data.length
-    assert_equal test_json[:values].first[:id], list.data.first.id
+    assert_equal test_json["values"].first["id"], list.data.first.id
     assert !list.has_more?()
 
     assert !list.next_page()

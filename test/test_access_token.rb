@@ -49,7 +49,7 @@ class TestAccessToken < Minitest::Test
 
   def test_send_get_request
     at = default_access_token()
-    expected_json = API_FIXTURES.fetch(:api_catalog)
+    expected_json = API_FIXTURES.fetch("api_catalog")
     stub_request(:get, "https://sandboxapi.deere.com/platform/").
       to_return(status: 200, body: JSON.generate(expected_json), headers: {})
 

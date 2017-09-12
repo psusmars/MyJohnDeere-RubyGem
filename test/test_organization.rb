@@ -1,8 +1,8 @@
 require File.expand_path('../test_helper', __FILE__)
 
 class TestOrganization < Minitest::Test
-  FIXTURE = API_FIXTURES.fetch(:organization)
-  FIXTURE_FOR_LIST = API_FIXTURES.fetch(:organizations)
+  FIXTURE = API_FIXTURES.fetch("organization")
+  FIXTURE_FOR_LIST = API_FIXTURES.fetch("organizations")
 
   def test_retrieve()
     stub_request(:get, /organizations/).
@@ -14,7 +14,7 @@ class TestOrganization < Minitest::Test
     assert_equal "Smith Farms", organization.name
     assert_equal "customer", organization.type
     assert_equal true, organization.user_is_member
-    assert_equal FIXTURE[:links].length, organization.links.length
+    assert_equal FIXTURE["links"].length, organization.links.length
     assert organization.access_token
   end
 
