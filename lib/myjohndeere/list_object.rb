@@ -16,9 +16,15 @@ module MyJohnDeere
     def initialize(listable, access_token, data, total: nil,
       options: {})
       @options = options
-      self.start ||= 0
-      self.count ||= 10
-      self.etag ||= nil
+      if self.using_etag?
+        MyJohnDeere.logger.info("Using etag, ignoring any specification about start/count")
+        self.start = 0
+        self.count = data.length
+      else
+        MyJohnDeere.logger.info("Etag omitted using start/count")
+        self.start ||= 0
+        self.count ||= 10
+      end
       # Confirm object is listable? 
       @listable = listable
       @data = data
@@ -43,7 +49,12 @@ module MyJohnDeere
     end
 
     def has_more?()
-      return self.start + self.data.length < self.total
+      return !self.using_etag? && self.start + self.data.length < self.total
+    end
+
+    def using_etag?
+      # will be equal "" or some other string
+      return !self.etag.nil?
     end
   end
 end

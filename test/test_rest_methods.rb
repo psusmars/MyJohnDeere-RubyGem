@@ -12,4 +12,14 @@ class TestRestMethods < Minitest::Test
       MyJohnDeere::Organization.retrieve(nil, 1234)
     end
   end
+
+  def test_list_with_etag
+    stub_request(:get, /organizations/).
+      with(headers: {MyJohnDeere::ETAG_HEADER_KEY => ""}).
+      to_return(status: 200, body: API_FIXTURES.generate_json("organizations"), headers: {MyJohnDeere::ETAG_HEADER_KEY=>"something"})
+
+    organizations = MyJohnDeere::Organization.list(default_access_token, count: 1, etag: "")
+
+    assert_equal "something", organizations.etag
+  end
 end
