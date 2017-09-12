@@ -37,6 +37,11 @@ class TestUtil < Minitest::Test
     assert_equal expected_path, path, "Shouldn't add extra start since we have it already"
   end
 
+  def test_etag_with_blank_body
+    path, headers, body = MyJohnDeere::Util.build_path_headers_and_body(:get, "test", etag: "", body: "")
+    assert_equal({"accept"=>"application/vnd.deere.axiom.v3+json", "X-Deere-Signature"=>""}, headers)
+  end
+
   def test_url_cleanup
     expected_path = "/organizations"
     path, headers, body = MyJohnDeere::Util.build_path_headers_and_body(:get, expected_path)

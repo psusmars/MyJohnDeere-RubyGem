@@ -18,29 +18,32 @@ module MyJohnDeere
       end
       headers = default_headers.merge(headers || {})
 
-      # we'll only accept hashes for the body for now
-      if REQUEST_METHODS_TO_PUT_PARAMS_IN_URL.include?(method) && body.is_a?(Hash) then
+      if REQUEST_METHODS_TO_PUT_PARAMS_IN_URL.include?(method) then
         if !etag.nil? then
           # Pass an empty string to have it start
           headers[MyJohnDeere::ETAG_HEADER_KEY] = etag
         end
-        uri = URI.parse(path)
-        new_query_ar = URI.decode_www_form(uri.query || '')
-        # For reasons beyond me, these are specified as non-parameters
-        special_parameters = {
-          start: body.delete(:start), 
-          count: body.delete(:count)
-        }
-        body.each do |key, val|
-          new_query_ar << [key.to_s, val.to_s]
+
+        # we'll only accept hashes for the body for now
+        if body.is_a?(Hash) then
+          uri = URI.parse(path)
+          new_query_ar = URI.decode_www_form(uri.query || '')
+          # For reasons beyond me, these are specified as non-parameters
+          special_parameters = {
+            start: body.delete(:start), 
+            count: body.delete(:count)
+          }
+          body.each do |key, val|
+            new_query_ar << [key.to_s, val.to_s]
+          end
+          special_parameters.each do |key,val|
+            next if val.nil?
+            query_string = "#{key}=#{val}"
+            uri.path = "#{uri.path};#{query_string}" if !uri.path.include?(query_string)
+          end
+          uri.query = URI.encode_www_form(new_query_ar)
+          path = uri.to_s
         end
-        special_parameters.each do |key,val|
-          next if val.nil?
-          query_string = "#{key}=#{val}"
-          uri.path = "#{uri.path};#{query_string}" if !uri.path.include?(query_string)
-        end
-        uri.query = URI.encode_www_form(new_query_ar)
-        path = uri.to_s
       end
 
       return path, headers, body
