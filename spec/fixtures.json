@@ -22,7 +22,7 @@
              "uri": "https://sandboxapi.deere.com/platform/mapLayerSummaries/2516aa2c-2c0d-4dae-ba63-5c44ff172a01/mapLayers"
           }
        ],
-       "id": "2516aa2c-2c0d-4dae-ba63-5c44ff172a01",
+       "id": "2516aa2c-1c0d-4dae-ba63-5c44ff172a01",
        "title": "some title",
        "text": "description of the map layers",
        "metadata": [
@@ -70,7 +70,7 @@
                    "uri": "https://sandboxapi.deere.com/platform/mapLayerSummaries/2516aa2c-2c0d-4dae-ba63-5c44ff172a01/mapLayers"
                 }
              ],
-             "id": "2516aa2c-2c0d-4dae-ba63-5c44ff172a01",
+             "id": "2516aa2c-1c0d-4dae-ba63-5c44ff172a01",
              "title": "some title",
              "text": "description of the map layers",
              "metadata": [
