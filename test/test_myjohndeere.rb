@@ -15,6 +15,14 @@ class TestMyJohnDeere < Minitest::Test
 
     MyJohnDeere.configuration.shared_secret = "blah"
     assert_equal "blah", MyJohnDeere.configuration.shared_secret
+
+    MyJohnDeere.configuration.contribution_definition_id = nil
+    assert_raises MyJohnDeere::ConfigurationError do
+      MyJohnDeere.configuration.contribution_definition_id
+    end
+
+    MyJohnDeere.configuration.contribution_definition_id = "something"
+    assert_equal "something", MyJohnDeere.configuration.contribution_definition_id 
   end
 
   def test_endpoint_setting

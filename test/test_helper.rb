@@ -18,6 +18,7 @@ class Minitest::Test
       config.app_id = "Dontcare"
       config.shared_secret = "somesecret"
       config.environment = :sandbox
+      config.contribution_definition_id = "foobar"
       #config.log_level = :info
     end
   end
