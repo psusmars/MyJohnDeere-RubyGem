@@ -1,6 +1,8 @@
 module MyJohnDeere
   class Organization < SingleResource
-    self.resource_base_path = "organizations"
+    self.base_jd_resource = "organizations"
+    self.list_resource_path = self.base_jd_resource
+    self.retrieve_resource_path = self.base_jd_resource
     attr_accessor :user_is_member, :type, :deleted
 
     def initialize(json_object, access_token = nil)
