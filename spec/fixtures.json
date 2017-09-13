@@ -74,6 +74,304 @@
         }
       ]
     },
+    "field_with_embedded_boundary" : {  
+      "@type":"Field",
+      "name":"AndersonFarms",
+      "boundaries":[  
+        {  
+          "@type":"Boundary",
+          "name":"a",
+          "modifiedTime":"2017-08-04T21:45:51.469Z",
+          "area":{  
+            "@type":"MeasurementAsDouble",
+            "valueAsDouble":15.892707870809991,
+            "unit":"ha"
+          },
+          "multipolygons":[  
+            {  
+              "@type":"Polygon",
+              "rings":[  
+                {  
+                  "@type":"Ring",
+                  "points":[  
+                    {  
+                      "@type":"Point",
+                      "lat":40.095079098,
+                      "lon":-105.032172203
+                    },
+                    {  
+                      "@type":"Point",
+                      "lat":40.095111927,
+                      "lon":-105.023052692
+                    },
+                    {  
+                      "@type":"Point",
+                      "lat":40.096425084,
+                      "lon":-105.023825169
+                    },
+                    {  
+                      "@type":"Point",
+                      "lat":40.096802611,
+                      "lon":-105.024554729
+                    },
+                    {  
+                      "@type":"Point",
+                      "lat":40.096457912,
+                      "lon":-105.025134087
+                    },
+                    {  
+                      "@type":"Point",
+                      "lat":40.097245793,
+                      "lon":-105.029489994
+                    },
+                    {  
+                      "@type":"Point",
+                      "lat":40.097492004,
+                      "lon":-105.030562878
+                    },
+                    {  
+                      "@type":"Point",
+                      "lat":40.097787456,
+                      "lon":-105.031678677
+                    },
+                    {  
+                      "@type":"Point",
+                      "lat":40.097771042,
+                      "lon":-105.032193661
+                    },
+                    {  
+                      "@type":"Point",
+                      "lat":40.095079098,
+                      "lon":-105.032172203
+                    }
+                  ],
+                  "type":"exterior",
+                  "passable":true
+                }
+              ]
+            }
+          ],
+          "extent":{  
+            "@type":"Extent",
+            "topLeft":{  
+              "@type":"Point",
+              "lat":40.097787456,
+              "lon":-105.032193661
+            },
+            "bottomRight":{  
+              "@type":"Point",
+              "lat":40.095079098,
+              "lon":-105.023052692
+            }
+          },
+          "id":"f4828b25-2a92-12a4-bf3e-a107c39ecb84",
+          "links":[  
+            {  
+              "@type":"Link",
+              "rel":"self",
+              "uri":"https://sandboxapi.deere.com/platform/organizations/1234/boundaries/f4828b25-2a92-4f2d-bf3e-a107c39ecb84"
+            },
+            {  
+              "@type":"Link",
+              "rel":"owningOrganization",
+              "uri":"https://sandboxapi.deere.com/platform/organizations/1234"
+            }
+          ],
+          "active":true
+        }
+      ],
+      "id":"2516aa2c-2c0d-4dae-ba63-5c64fd172d01",
+      "links":[  
+        {  
+          "@type":"Link",
+          "rel":"self",
+          "uri":"https://sandboxapi.deere.com/platform/organizations/1234/fields/2516aa2c-2c0d-4dae-ba63-5c64fd172d01"
+        },
+        {  
+          "@type":"Link",
+          "rel":"clients",
+          "uri":"https://sandboxapi.deere.com/platform/organizations/1234/fields/2516aa2c-2c0d-4dae-ba63-5c64fd172d01/clients"
+        },
+        {  
+          "@type":"Link",
+          "rel":"notes",
+          "uri":"https://sandboxapi.deere.com/platform/organizations/1234/fields/2516aa2c-2c0d-4dae-ba63-5c64fd172d01/notes"
+        },
+        {  
+          "@type":"Link",
+          "rel":"farms",
+          "uri":"https://sandboxapi.deere.com/platform/organizations/1234/fields/2516aa2c-2c0d-4dae-ba63-5c64fd172d01/farms"
+        },
+        {  
+          "@type":"Link",
+          "rel":"owningOrganization",
+          "uri":"https://sandboxapi.deere.com/platform/organizations/1234"
+        },
+        {  
+          "@type":"Link",
+          "rel":"simplifiedBoundaries",
+          "uri":"https://sandboxapi.deere.com/platform/organizations/1234/fields/2516aa2c-2c0d-4dae-ba63-5c64fd172d01/boundaries?simple=true"
+        },
+        {  
+          "@type":"Link",
+          "rel":"addBoundary",
+          "uri":"https://sandboxapi.deere.com/platform/organizations/1234/fields/2516aa2c-2c0d-4dae-ba63-5c64fd172d01/boundaries"
+        },
+        {  
+          "@type":"Link",
+          "rel":"activeBoundary",
+          "uri":"https://sandboxapi.deere.com/platform/organizations/1234/boundaries/f4828b25-2a92-4f2d-bf3e-a107c39ecb84"
+        },
+        {  
+          "@type":"Link",
+          "rel":"fieldOperation",
+          "uri":"https://sandboxapi.deere.com/platform/organizations/1234/fields/2516aa2c-2c0d-4dae-ba63-5c64fd172d01/fieldOperations"
+        }
+      ]
+    },
+    "boundary" : {
+       "name": "2/25/2015 6:01:19 PM",
+       "area": {
+          "valueAsDouble": 70.8407,
+          "unit": "ha"
+       },
+       "multipolygons": [
+          {
+             "rings": [
+                {
+                   "points": [
+                      {
+                         "lat": 41.538383,
+                         "lon": -90.81443
+                      },
+                      {
+                         "lat": 41.530777,
+                         "lon": -90.81459
+                      },
+                      {
+                         "lat": 41.530895,
+                         "lon": -90.82465
+                      },
+                      {
+                         "lat": 41.538517,
+                         "lon": -90.82444
+                      },
+                      {
+                         "lat": 41.538383,
+                         "lon": -90.81443
+                      }
+                   ],
+                   "type": "exterior",
+                   "passable": true
+                }
+             ]
+          }
+       ],
+       "extent": {
+          "topLeft": {
+             "lat": 41.538517,
+             "lon": -90.82465
+          },
+          "bottomRight": {
+             "lat": 41.530777,
+             "lon": -90.81443
+          }
+       },
+       "links": [
+          {
+             "rel": "self",
+             "uri": "https://sandboxapi.deere.com/platform/organizations/1234/boundaries/6232611a-0303-0234-8g7d-e1e1e11871b8"
+          },
+          // TODO: CONTACT JOHN DEERE TESTING DOES NOT SHOW THIS IS IN EXISTANCE
+          // {
+          //    "rel": "fields",
+          //    "uri": "https://sandboxapi.deere.com/platform/organizations/1234/boundaries/6232611a-0303-0234-8g7d-e1e1e11871b8/fields"
+          // },
+          {
+             "rel": "owningOrganization",
+             "uri": "https://sandboxapi.deere.com/platform/organizations/1234"
+          }
+       ],
+       "id": "6232611a-0303-0234-8g7d-e1e1e11871b8",
+       "active": "true"
+    },
+    "boundaries" : {
+       "links": [
+          {
+             "rel": "self",
+             "uri": "https://sandboxapi.deere.com/platform/organizations/1234/fields/6232611a-0303-0234-8g7d-e1e1e11871b8/boundaries"
+          }
+       ],
+       "total": 1,
+       "values": [
+          {
+             "name": "2/25/2015 6:01:19 PM",
+             "area": {
+                "valueAsDouble": 70.8407,
+                "unit": "ha"
+             },
+             "multipolygons": [
+                {
+                   "rings": [
+                      {
+                         "points": [
+                            {
+                               "lat": 41.538383,
+                               "lon": -90.81443
+                            },
+                            {
+                               "lat": 41.530777,
+                               "lon": -90.81459
+                            },
+                            {
+                               "lat": 41.530895,
+                               "lon": -90.82465
+                            },
+                            {
+                               "lat": 41.538517,
+                               "lon": -90.82444
+                            },
+                            {
+                               "lat": 41.538383,
+                               "lon": -90.81443
+                            }
+                         ],
+                         "type": "exterior",
+                         "passable": true
+                      }
+                   ]
+                }
+             ],
+             "extent": {
+                "topLeft": {
+                   "lat": 41.538517,
+                   "lon": -90.82465
+                },
+                "bottomRight": {
+                   "lat": 41.530777,
+                   "lon": -90.81443
+                }
+             },
+             "links": [
+                {
+                   "rel": "self",
+                   "uri": "https://sandboxapi.deere.com/platform/organizations/1234/boundaries/6232611a-0303-0234-8g7d-e1e1e11871b8"
+                },
+                // TODO: CONTACT JOHN DEERE TESTING DOES NOT SHOW THIS IS IN EXISTANCE
+                // {
+                //    "rel": "fields",
+                //    "uri": "https://sandboxapi.deere.com/platform/organizations/1234/boundaries/6232611a-0303-0234-8g7d-e1e1e11871b8/fields"
+                // },
+                {
+                   "rel": "owningOrganization",
+                   "uri": "https://api.deere.com/platform/organizations/1234"
+                }
+             ],
+             "id": "6232611a-0303-0234-8g7d-e1e1e11871b8",
+             "active": "true"
+          }
+       ]
+    },
     "field" : {
        "name": "Nautilus",
        "links": [
@@ -103,7 +401,8 @@
           }
        ],
        "id": "MWUxZTExODZiMzg"
-    }, "fields" : {
+    }, 
+    "fields" : {
        "links": [
           {
              "rel": "self",

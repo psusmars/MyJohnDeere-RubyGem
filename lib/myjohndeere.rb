@@ -19,10 +19,12 @@ require 'myjohndeere/response'
 require 'myjohndeere/access_token'
 require 'myjohndeere/list_object'
 require 'myjohndeere/single_resource'
+require 'myjohndeere/organization_owned_resource'
 
 # API Objects
 require 'myjohndeere/organization'
 require 'myjohndeere/field'
+require 'myjohndeere/boundary'
 
 module MyJohnDeere
   class << self

@@ -20,6 +20,21 @@ class TestField < Minitest::Test
     assert_equal FIXTURE["links"].length, field.links.length
   end
 
+  def test_retrieve_with_embedded_boudnary
+    fixture = API_FIXTURES["field_with_embedded_boundary"]
+    stub_request(:get, /\/organizations\/#{ORGANIZATION_FIXTURE["id"]}\/fields\/#{fixture["id"]}/).
+      with(query: {embed: "boundaries"}).
+      to_return(status: 200, body: fixture.to_json)
+
+    field = MyJohnDeere::Field.retrieve(default_access_token, 
+      fixture["id"], organization_id: ORGANIZATION_FIXTURE["id"],
+      body: {embed: "boundaries"})
+
+    assert field.instance_variable_get(:@boundary)
+    assert_equal fixture["boundaries"][0]["id"], field.boundary.id
+    assert_equal field.id, field.boundary.field_id
+  end
+
   def test_list()
     stub_request(:get, /organizations\/#{ORGANIZATION_FIXTURE["id"]}\/fields/).
       to_return(status: 200, body: FIXTURE_FOR_LIST.to_json)
