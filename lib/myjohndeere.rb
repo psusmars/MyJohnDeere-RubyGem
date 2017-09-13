@@ -65,7 +65,7 @@ module MyJohnDeere
 
   class Configuration
     attr_accessor :endpoint
-    attr_writer :shared_secret, :app_id
+    attr_writer :shared_secret, :app_id, :contribution_definition_id
     attr_reader :environment
 
     def log_level=(val)
@@ -90,6 +90,14 @@ module MyJohnDeere
       self.environment = :sandbox
       @shared_secret = nil
       @app_id = nil
+    end
+
+    def contribution_definition_id
+      if @contribution_definition_id.nil? then
+        raise ConfigurationError.new('No contribution_definition_id provided in configuration. ' \
+          'Please set this to make the request, you\'ll need to contact JohnDeere support to get this value.')
+      end
+      return @contribution_definition_id
     end
 
     def shared_secret

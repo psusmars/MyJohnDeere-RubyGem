@@ -15,10 +15,13 @@ MyJohnDeere.configure do |config|
   config.environment = :sandbox # :production is the other option
   config.shared_secret = "...."
   config.app_id = "johndeere-...."
+  # config.contribution_definition_id = "...." # not required for all requests
   #config.log_level = :info
 end
 
 ```
+
+The `contribution_definition_id` is used for a subset of requests, usually when you are adding resources to a map or otherwise. You can get this by contacting [JohnDeere Dev Support](APIDevSupport@johndeere.com) An error will be raised if this is missing for a certain request.
 
 ### Get an Access Token
 
