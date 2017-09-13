@@ -13,7 +13,7 @@ class TestOrganization < Minitest::Test
     assert_equal "1234", organization.id
     assert_equal "Smith Farms", organization.name
     assert_equal "customer", organization.type
-    assert_equal true, organization.user_is_member
+    assert_equal true, organization.member
     assert_equal FIXTURE["links"].length, organization.links.length
     assert organization.access_token
   end
@@ -26,6 +26,7 @@ class TestOrganization < Minitest::Test
 
     assert_equal 1, organizations.data.length
     assert_equal MyJohnDeere::Organization, organizations.data[0].class
+    assert_equal 2, organizations.links.length
   end
 
   def test_fields()

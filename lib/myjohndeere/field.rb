@@ -3,6 +3,7 @@ module MyJohnDeere
     self.base_jd_resource = "fields"
     self.list_resource_path = "organizations/%{organization_id}/#{self.base_jd_resource}"
     self.retrieve_resource_path = "organizations/%{organization_id}/#{self.base_jd_resource}"
+    attributes_to_pull_from_json(:id, :name, :boundaries)
 
     def initialize(json_object, access_token = nil)
       super(json_object, access_token)

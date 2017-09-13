@@ -3,12 +3,9 @@ module MyJohnDeere
     self.base_jd_resource = "organizations"
     self.list_resource_path = self.base_jd_resource
     self.retrieve_resource_path = self.base_jd_resource
-    attr_accessor :user_is_member, :type, :deleted
+    attributes_to_pull_from_json(:id, :name, :type, :member)
 
     def initialize(json_object, access_token = nil)
-      # This will be either customer or dealer
-      self.type = json_object["type"]
-      self.user_is_member = json_object["member"]
       super(json_object, access_token)
     end
 

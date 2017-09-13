@@ -1,4 +1,89 @@
 {
+    "map_layer_summary" : {
+       "links": [
+          {
+             "rel": "self",
+             "uri": "https://sandboxapi.deere.com/platform/mapLayerSummaries/2516aa2c-2c0d-4dae-ba63-5c44ff172a01"
+          },
+          {
+             "rel": "owningOrganization",
+             "uri": "https://sandboxapi.deere.com/platform/organizations/1234"
+          },
+          {
+             "rel": "contributionDefinition",
+             "uri": "https://sandboxapi.deere.com/platform/contributionDefinitions/DEFINITION_GUID"
+          },
+          {
+             "rel": "targetResource",
+             "uri": "https://sandboxapi.deere.com/platform/organizations/1234/fields/2516aa2c-2c0d-4dae-ba63-5c64fd172d01"
+          },
+          {
+             "rel": "mapLayers",
+             "uri": "https://sandboxapi.deere.com/platform/mapLayerSummaries/2516aa2c-2c0d-4dae-ba63-5c44ff172a01/mapLayers"
+          }
+       ],
+       "id": "2516aa2c-2c0d-4dae-ba63-5c44ff172a01",
+       "title": "some title",
+       "text": "description of the map layers",
+       "metadata": [
+          {
+             "name": "The Name",
+             "value": "The Value"
+          }
+       ],
+       "dateCreated": "2016-01-02T16:14:23.421Z",
+       "lastModifiedDate": "2016-01-02T16:14:23.421Z"
+    },
+    "map_layer_summaries" : {
+       "links": [
+          {
+             "rel": "self",
+             "uri": "https://sandboxapi.deere.com/platform/organizations/1234/fields/2516aa2c-2c0d-4dae-ba63-5c64fd172d01/mapLayerSummaries"
+          },
+          {
+             "rel": "nextPage",
+             "uri": "https://sandboxapi.deere.com/platform/organizations/1234/fields/2516aa2c-2c0d-4dae-ba63-5c64fd172d01/mapLayerSummaries;start=10;count=10"
+          }
+       ],
+       "total": 1,
+       "values": [
+          {
+             "links": [
+                {
+                   "rel": "self",
+                   "uri": "https://sandboxapi.deere.com/platform/mapLayerSummaries/2516aa2c-2c0d-4dae-ba63-5c44ff172a01"
+                },
+                {
+                   "rel": "owningOrganization",
+                   "uri": "https://sandboxapi.deere.com/platform/organizations/1234"
+                },
+                {
+                   "rel": "contributionDefinition",
+                   "uri": "https://sandboxapi.deere.com/platform/contributionDefinitions/DEFINITION_GUID"
+                },
+                {
+                   "rel": "targetResource",
+                   "uri": "https://sandboxapi.deere.com/platform/organizations/1234/fields/2516aa2c-2c0d-4dae-ba63-5c64fd172d01"
+                },
+                {
+                   "rel": "mapLayers",
+                   "uri": "https://sandboxapi.deere.com/platform/mapLayerSummaries/2516aa2c-2c0d-4dae-ba63-5c44ff172a01/mapLayers"
+                }
+             ],
+             "id": "2516aa2c-2c0d-4dae-ba63-5c44ff172a01",
+             "title": "some title",
+             "text": "description of the map layers",
+             "metadata": [
+                {
+                   "name": "The Name",
+                   "value": "The Value"
+                }
+             ],
+             "dateCreated": "2016-01-02T16:14:23.421Z",
+             "lastModifiedDate": "2016-01-02T16:14:23.421Z"
+          }
+       ]
+    },
     "api_catalog" : {  
       "@type":"ApiCatalog",
       "links":[  

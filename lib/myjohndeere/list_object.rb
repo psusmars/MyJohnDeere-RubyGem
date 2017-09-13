@@ -13,24 +13,24 @@ module MyJohnDeere
       end    
     end
 
-    def initialize(listable, access_token, data, total: nil,
+    def initialize(listable, access_token, json_data,
       options: {})
       @options = options
+      # Confirm object is listable? 
+      @listable = listable
+      @data = json_data["values"].collect { |i| listable.new(i, access_token) }
       if self.using_etag?
         MyJohnDeere.logger.info("Using etag, ignoring any specification about start/count")
         self.start = 0
-        self.count = data.length
+        self.count = @data.length
       else
         MyJohnDeere.logger.info("Etag omitted using start/count")
         self.start ||= 0
         self.count ||= 10
       end
-      # Confirm object is listable? 
-      @listable = listable
-      @data = data
       # Total is the total record count as specified by the john deere response
-      @total = total || data.length
-      super(access_token)
+      @total = json_data["total"] || data.length
+      super(json_data, access_token)
     end
 
     def each(&blk)

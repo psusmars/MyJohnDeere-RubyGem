@@ -4,7 +4,7 @@ module MyJohnDeere
     
     def initialize(json_object, access_token = nil)
       super(json_object, access_token)
-      self.organization_id = extract_link_with_rel_from_list("owningOrganization", /\/(\d+)\Z/)
+      self.organization_id = extract_link_with_rel_from_list("owningOrganization", /organizations\/([^\/]+)\Z/)
     end
   end
 end

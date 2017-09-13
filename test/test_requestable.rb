@@ -5,11 +5,11 @@ class TestAccessToken < Minitest::Test
     assert MyJohnDeere::Requestable.new()
 
     expected_object = default_access_token()
-    requestable = MyJohnDeere::Requestable.new(expected_object)
+    requestable = MyJohnDeere::Requestable.new({}, expected_object)
     assert_equal expected_object, requestable.access_token
 
     assert_raises ArgumentError do
-      MyJohnDeere::Requestable.new("something")
+      MyJohnDeere::Requestable.new({}, "something")
     end
   end
 end

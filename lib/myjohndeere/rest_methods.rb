@@ -18,12 +18,10 @@ module MyJohnDeere
         response = access_token.execute_request(:get, build_resouce_base_path!(self.list_resource_path, options), 
           options
         )
-        return_data = response.data["values"]
         return ListObject.new(
           self,
           access_token,
-          return_data.collect { |i| self.new(i, access_token) },
-          total: response.data["total"],
+          response.data,
           options: options.merge(
             etag: response.http_headers[MyJohnDeere::ETAG_HEADER_KEY]
           )

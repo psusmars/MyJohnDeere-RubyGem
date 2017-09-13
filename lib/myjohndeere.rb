@@ -5,6 +5,9 @@ require 'base64'
 require 'oauth'
 require 'logger'
 
+# Core extensions
+require 'myjohndeere/core_ext/string'
+
 # Errors
 require 'myjohndeere/errors'
 
@@ -13,6 +16,7 @@ require 'myjohndeere/version'
 
 # API Support Classes
 require 'myjohndeere/rest_methods'
+require 'myjohndeere/json_attributes'
 require 'myjohndeere/requestable'
 require 'myjohndeere/util'
 require 'myjohndeere/response'
@@ -25,6 +29,7 @@ require 'myjohndeere/organization_owned_resource'
 require 'myjohndeere/organization'
 require 'myjohndeere/field'
 require 'myjohndeere/boundary'
+require 'myjohndeere/map_layer_summary'
 
 module MyJohnDeere
   class << self

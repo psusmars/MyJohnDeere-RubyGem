@@ -2,13 +2,13 @@ require File.expand_path('../test_helper', __FILE__)
 
 class TestListObject < Minitest::Test
   def test_each_loop
-    data = ["x","y","z"]
+    data = Array.new(3, API_FIXTURES["organization"])
     list = MyJohnDeere::ListObject.new(MyJohnDeere::Organization, 
       default_access_token, 
-      data)
+      {"values" => data})
 
     list.each_with_index do |x, i|
-      assert_equal data[i], x
+      assert_equal data[i]["id"], x.id
     end
 
     assert_equal data.length, list.total
@@ -17,23 +17,26 @@ class TestListObject < Minitest::Test
   def test_has_more
     expected_total = 3
     list = MyJohnDeere::ListObject.new(MyJohnDeere::Organization,
-      default_access_token, [], total: expected_total, options: {start: 0})
+      default_access_token, {
+        "total" => expected_total,
+        "values" => Array.new(1, API_FIXTURES["organization"])
+      }, options: {start: 0})
     assert list.has_more?
 
     list.start = expected_total
     assert !list.has_more?
 
     list = MyJohnDeere::ListObject.new(MyJohnDeere::Organization,
-      default_access_token, (1..3).to_a, total: expected_total, options: {start: 0})
+      default_access_token, {"values" =>[]}, options: {start: 0})
     assert !list.has_more?, "The data is equal to the total"
   end
 
   def test_get_next_page_with_etag
     # etag behavior gets the entire list.
     test_json = API_FIXTURES["organizations"]
-    existing_data = (1..(test_json["total"]-1)).to_a
+    existing_data = Array.new(test_json["total"]-1, test_json["values"][0])
     list = MyJohnDeere::ListObject.new(MyJohnDeere::Organization, default_access_token, 
-      existing_data, total: test_json["total"], options: {
+      {"values" => existing_data}, options: {
         start: 0, count: existing_data.length, etag: ""})
     assert list.using_etag?
     assert !list.has_more?
@@ -51,7 +54,7 @@ class TestListObject < Minitest::Test
     test_json = API_FIXTURES["organizations"]
     existing_data = (1..(test_json["total"]-1)).to_a
     list = MyJohnDeere::ListObject.new(MyJohnDeere::Organization, default_access_token, 
-      existing_data, total: test_json["total"], options: {start: 0,
+      test_json, options: {start: 0,
       count: existing_data.length})
     assert list.has_more?
     assert !list.using_etag?
