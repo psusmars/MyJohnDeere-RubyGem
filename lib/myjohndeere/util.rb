@@ -12,7 +12,7 @@ module MyJohnDeere
         body = body.to_json() if body.is_a?(Hash)
         default_headers = MyJohnDeere::DEFAULT_POST_HEADER
         content_length = body.length
-        headers["Content-Length"] ||= body.length.to_s if content_length > 0
+        default_headers["Content-Length"] ||= body.length.to_s if content_length > 0
       else
         default_headers = MyJohnDeere::DEFAULT_REQUEST_HEADER
       end
