@@ -1,4 +1,70 @@
 {
+    "file_resource" : {
+       "links": [
+          {
+             "rel": "self",
+             "uri": "https://sandboxapi.deere.com/platform/fileResources/8sz21113-2afj-9302-837j-92jlsk92jd095kd"
+          },
+          {
+             "rel": "owningOrganization",
+             "uri": "https://sandboxapi.deere.com/platform/organizations/1234"
+          },
+          {
+             "rel": "targetResource",
+             "uri": "https://sandboxapi.deere.com/platform/mapLayers/83ks9gh3-29fj-9302-837j-92jlsk92jd095kd"
+          }
+       ],
+       "id": "8sz21113-2afj-9302-837j-92jlsk92jd095kd",
+       "mimeType": "image/png",
+       "metadata": [
+          {
+             "name": "The Name",
+             "value": "The Value"
+          }
+       ],
+       "timestamp": "2016-01-02T16:14:23.421Z"
+    },
+    "file_resources" : {
+       "links": [
+          {
+             "rel": "self",
+             "uri": "https://sandboxapi.deere.com/platform/mapLayers/83ks9gh3-29fj-9302-837j-92jlsk92jd095kd/fileResources"
+          },
+          {
+             "rel": "nextPage",
+             "uri": "https://sandboxapi.deere.com/platform/mapLayers/83ks9gh3-29fj-9302-837j-92jlsk92jd095kd/fileResources;start=10;count=10"
+          }
+       ],
+       "total": 1,
+       "values": [
+          {
+             "links": [
+                {
+                   "rel": "self",
+                   "uri": "https://sandboxapi.deere.com/platform/notes/NOTE_GUID"
+                },
+                {
+                   "rel": "owningOrganization",
+                   "uri": "https://sandboxapi.deere.com/platform/organizations/1234"
+                },
+                {
+                   "rel": "targetResource",
+                   "uri": "https://sandboxapi.deere.com/platform/mapLayers/83ks9gh3-29fj-9302-837j-92jlsk92jd095kd"
+                }
+             ],
+             "id": "8sz21113-2afj-9302-837j-92jlsk92jd095kd",
+             "fileName": "fileName.png",
+             "mimeType": "image/png",
+             "metadata": [
+                {
+                   "name": "The Name",
+                   "value": "The Value"
+                }
+             ],
+             "timestamp": "2016-01-02T16:14:23.421Z"
+          }
+       ]
+    },
     "map_layer" : {
        "links": [
           {

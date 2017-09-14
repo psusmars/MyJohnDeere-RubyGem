@@ -24,9 +24,11 @@ require 'myjohndeere/access_token'
 require 'myjohndeere/list_object'
 require 'myjohndeere/single_resource'
 require 'myjohndeere/organization_owned_resource'
+require 'myjohndeere/api_support_item'
 
 # API Sub-classes
 require 'myjohndeere/map_legend_item'
+require 'myjohndeere/metadata_item'
 
 # API Objects
 require 'myjohndeere/organization'
@@ -34,6 +36,7 @@ require 'myjohndeere/field'
 require 'myjohndeere/boundary'
 require 'myjohndeere/map_layer_summary'
 require 'myjohndeere/map_layer'
+require 'myjohndeere/file_resource'
 
 module MyJohnDeere
   class << self

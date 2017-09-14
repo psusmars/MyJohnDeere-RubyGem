@@ -22,7 +22,7 @@ module MyJohnDeere
         self.class.json_attributes.each do |attrib|
           attrib = attrib.to_s
           val = json_data[attrib]
-          if /date/i.match(attrib) then
+          if /(date)|(timestamp)/i.match(attrib) then
             # try to parse it
             val = Time.parse(val) rescue val
           end
