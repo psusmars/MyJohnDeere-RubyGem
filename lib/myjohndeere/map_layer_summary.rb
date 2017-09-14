@@ -21,7 +21,7 @@ module MyJohnDeere
                uri: "#{MyJohnDeere.configuration.endpoint}/#{MyJohnDeere.configuration.contribution_definition_id}"
             }
          ],
-        metadata: metadata,
+        metadata: metadata.map { |md| md.to_hash },
         dateCreated: (date_created || Time.now).strftime("%Y-%m-%dT%H:%M:%S.%LZ")
       }
       response = access_token.execute_request(:post, 
