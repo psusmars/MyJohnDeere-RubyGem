@@ -17,7 +17,7 @@ module MyJohnDeere
         links: [
           self.owning_organization_link_item(organization_id)
         ],
-        title: "The title on the map layer",
+        title: title,
         extent: {
           minimumLatitude: minimum_latitude,
           maximumLatitude: maximum_latitude,

@@ -36,7 +36,7 @@ class TestMapLayer < Minitest::Test
   end
 
   def test_create
-    expected_body = "{\"links\":[{\"rel\":\"owningOrganization\",\"uri\":\"https://sandboxapi.deere.com/platform/organizations/1234\"}],\"title\":\"The title on the map layer\",\"extent\":{\"minimumLatitude\":0,\"maximumLatitude\":1,\"minimumLongitude\":0,\"maximumLongitude\":1},\"legends\":{\"unitId\":\"foo\",\"ranges\":[{\"label\":\"bar\",\"minimum\":1,\"maximum\":2,\"hexColor\":\"#0BA74A\",\"percent\":15.0}]}}"
+    expected_body = "{\"links\":[{\"rel\":\"owningOrganization\",\"uri\":\"https://sandboxapi.deere.com/platform/organizations/1234\"}],\"title\":\"blah\",\"extent\":{\"minimumLatitude\":0,\"maximumLatitude\":1,\"minimumLongitude\":0,\"maximumLongitude\":1},\"legends\":{\"unitId\":\"foo\",\"ranges\":[{\"label\":\"bar\",\"minimum\":1,\"maximum\":2,\"hexColor\":\"#0BA74A\",\"percent\":15.0}]}}"
     stub_request(:post, /mapLayerSummaries\/#{MLS_ID}\/mapLayers/).
       with(body: expected_body,
        headers: {'Accept'=>'application/vnd.deere.axiom.v3+json', 'Content-Length'=>expected_body.length, 'Content-Type'=>'application/vnd.deere.axiom.v3+json'}).
@@ -45,6 +45,7 @@ class TestMapLayer < Minitest::Test
       MLS_ID,
       ORGANIZATION_ID,
       minimum_latitude: 0, minimum_longitude: 0, maximum_latitude: 1, maximum_longitude: 1,
+      title: "blah",
       map_layer_id: "foo", map_legend_items: [MyJohnDeere::MapLegendItem.new("bar", 1, 2, "#0BA74A", 15.0)]
     )
     assert_equal MAP_LAYER_ID, response
