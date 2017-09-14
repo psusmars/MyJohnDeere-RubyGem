@@ -59,13 +59,13 @@ module MyJohnDeere
   ENDPOINTS = {
     sandbox: "https://sandboxapi.deere.com/platform",
     production: "https://api.soa-proxy.deere.com/platform"
-  }
+  }.freeze
   AUTHORIZE_URL = "https://my.deere.com/consentToUseOfData"
-  DEFAULT_REQUEST_HEADER = { 'accept'=> JSON_CONTENT_HEADER_VALUE }
+  DEFAULT_REQUEST_HEADER = { 'accept'=> JSON_CONTENT_HEADER_VALUE }.freeze
   DEFAULT_POST_HEADER = { 
     'accept'=> JSON_CONTENT_HEADER_VALUE,
     "Content-Type"=> JSON_CONTENT_HEADER_VALUE
-  }
+  }.freeze
   ETAG_HEADER_KEY = "X-Deere-Signature"
   REQUEST_METHODS_TO_PUT_PARAMS_IN_URL = [:get, :delete, :head]
   SPECIAL_BODY_PARAMETERS = [:start, :count]

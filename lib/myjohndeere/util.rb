@@ -10,7 +10,7 @@ module MyJohnDeere
       default_headers = nil
       if method == :post || method == :put then
         body = body.to_json() if body.is_a?(Hash)
-        default_headers = MyJohnDeere::DEFAULT_POST_HEADER
+        default_headers = MyJohnDeere::DEFAULT_POST_HEADER.dup
         content_length = body.length
         default_headers["Content-Length"] ||= body.length.to_s if content_length > 0
       else
