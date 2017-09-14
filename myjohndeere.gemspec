@@ -10,7 +10,7 @@ spec = Gem::Specification.new do |s|
   s.description = ' MyJohnDeere is used to make data-driven decisions to maximize your return on every acre. This Ruby Gem is provided as a convenient way to access their API.'
   s.author = 'Paul Susmarski'
   s.email = 'paul@susmarski.com'
-  s.homepage = 'http://rubygems.org/gems/myjohndeere'
+  s.homepage = 'https://github.com/psusmars/myjohndeere'
   s.license = 'MIT'
 
   s.add_dependency "oauth", ">= 0.5.3"
