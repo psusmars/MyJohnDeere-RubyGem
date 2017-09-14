@@ -17,10 +17,7 @@ module MyJohnDeere
           title: title,
           text: caption,
           links: [
-              {
-                 rel: "owningOrganization",
-                 uri: "#{MyJohnDeere.configuration.endpoint}/organizations/#{organization_id}"
-              },
+              owning_organization_link_item(organization_id),
               {
                  rel: "contributionDefinition",
                  uri: "#{MyJohnDeere.configuration.endpoint}/#{MyJohnDeere.configuration.contribution_definition_id}"
@@ -32,15 +29,7 @@ module MyJohnDeere
       )
       # 201
       #{"Content-Type"=>"text/plain", "X-Deere-Handling-Server"=>"ldxtc4", "X-Frame-Options"=>"SAMEORIGIN", "Location"=>"https://sandboxapi.deere.com/platform/mapLayerSummaries/c5e9317e-eda6-48d3-acc8-c3bca3424858", "X-Deere-Elapsed-Ms"=>"362", "Vary"=>"Accept-Encoding", "Expires"=>"Wed, 13 Sep 2017 22:00:45 GMT", "Cache-Control"=>"max-age=0, no-cache", "Pragma"=>"no-cache", "Date"=>"Wed, 13 Sep 2017 22:00:45 GMT", "Transfer-Encoding"=>"chunked", "Connection"=>"close, Transfer-Encoding"}
-      # The lowercase location shouldn't be needed but sometimes it is returned as lowercase...
-      created_id = response.http_headers["Location"] || response.http_headers["location"]
-      if !created_id.nil? then
-        created_id = /#{self.base_jd_resource}\/([^\/]+)\Z/.match(created_id)[1]
-      else
-        # didn't succeed
-        MyJohnDeere.logger.info("Failed to create MapLayerSummary: #{response}")
-      end
-      return created_id
+      return get_created_id_from_response_headers(self.base_jd_resource, response)
     end
   end
 end

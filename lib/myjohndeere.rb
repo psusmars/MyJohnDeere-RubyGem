@@ -25,11 +25,15 @@ require 'myjohndeere/list_object'
 require 'myjohndeere/single_resource'
 require 'myjohndeere/organization_owned_resource'
 
+# API Sub-classes
+require 'myjohndeere/map_legend_item'
+
 # API Objects
 require 'myjohndeere/organization'
 require 'myjohndeere/field'
 require 'myjohndeere/boundary'
 require 'myjohndeere/map_layer_summary'
+require 'myjohndeere/map_layer'
 
 module MyJohnDeere
   class << self

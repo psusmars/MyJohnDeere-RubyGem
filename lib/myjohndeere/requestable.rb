@@ -19,5 +19,18 @@ module MyJohnDeere
         return nil
       end
     end
+
+    def self.get_created_id_from_response_headers(resource, response)
+      # 201 is the expected response code
+      # The lowercase location shouldn't be needed but sometimes it is returned as lowercase...
+      created_id = response.http_headers["Location"] || response.http_headers["location"]
+      if !created_id.nil? then
+        created_id = /#{resource}\/([^\/]+)\Z/.match(created_id)[1]
+      else
+        # didn't succeed
+        MyJohnDeere.logger.info("Failed to create a #{resource}: #{response}")
+        return nil
+      end
+    end
   end
 end

@@ -1,4 +1,99 @@
 {
+    "map_layer" : {
+       "links": [
+          {
+             "rel": "self",
+             "uri": "https://sandboxapi.deere.com/platform/mapLayers/83ks9gh3-29fj-9302-837j-92jlsk92jd095kd"
+          },
+          {
+             "rel": "owningOrganization",
+             "uri": "https://sandboxapi.deere.com/platform/organizations/1234"
+          },
+          {
+             "rel": "mapLayerSummary",
+             "uri": "https://sandboxapi.deere.com/platform/mapLayerSummaries/2516aa2c-2c0d-4dae-ba63-5c44ff172a01"
+          },
+          {
+             "rel": "fileResources",
+             "uri": "https://sandboxapi.deere.com/platform/mapLayers/83ks9gh3-29fj-9302-837j-92jlsk92jd095kd/fileResources"
+          }
+       ],
+       "id": "83ks9gh3-29fj-9302-837j-92jlsk92jd095kd",
+       "title": "The title on the map layer",
+       "extent": {
+          "minimumLatitude": 41.76073,
+          "maximumLatitude": 41.771366,
+          "minimumLongitude": -93.488106,
+          "maximumLongitude": -93.4837
+       },
+       "legends": {
+          "unitId": "seeds1ha-1",
+          "ranges": [
+             {
+                "label": "Some Label",
+                "minimum": 87300,
+                "maximum": 87300,
+                "hexColor": "#0BA74A",
+                "percent": 0.13
+             }
+          ]
+       }
+    },
+    "map_layers" : {
+       "links": [
+          {
+             "rel": "self",
+             "uri": "https://sandboxapi.deere.com/platform/mapLayerSummary/2516aa2c-1c0d-4dae-ba63-5c44ff172a01/mapLayers"
+          },
+          {
+             "rel": "nextPage",
+             "uri": "https://sandboxapi.deere.com/platform/mapLayerSummary/2516aa2c-1c0d-4dae-ba63-5c44ff172a01/mapLayers;start=10;count=10"
+          }
+       ],
+       "total": 1,
+       "values": [
+          {
+             "links": [
+                {
+                   "rel": "self",
+                   "uri": "https://sandboxapi.deere.com/platform/mapLayers/83ks9gh3-29fj-9302-837j-92jlsk92jd095kd"
+                },
+                {
+                   "rel": "owningOrganization",
+                   "uri": "https://sandboxapi.deere.com/platform/organizations/1234"
+                },
+                {
+                   "rel": "mapLayerSummary",
+                   "uri": "https://sandboxapi.deere.com/platform/mapLayerSummaries/2516aa2c-1c0d-4dae-ba63-5c44ff172a01"
+                },
+                {
+                   "rel": "fileResources",
+                   "uri": "https://sandboxapi.deere.com/platform/mapLayers/83ks9gh3-29fj-9302-837j-92jlsk92jd095kd/fileResources"
+                }
+             ],
+             "id": "83ks9gh3-29fj-9302-837j-92jlsk92jd095kd",
+             "title": "The title on the map layer",
+             "extent": {
+                "minimumLatitude": 41.76073,
+                "maximumLatitude": 41.771366,
+                "minimumLongitude": -93.488106,
+                "maximumLongitude": -93.4837
+             },
+             "legends": {
+                "unitId": "seeds1ha-1",
+                "ranges": [
+                   {
+                      "label": "Some Label",
+                      "minimum": 87300,
+                      "maximum": 87300,
+                      "hexColor": "#0BA74A",
+                      "percent": 0.13
+                   }
+                ]
+             }
+          }
+       ]
+    },
     "map_layer_summary" : {
        "links": [
           {
