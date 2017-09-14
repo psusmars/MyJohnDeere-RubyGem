@@ -39,7 +39,7 @@ module MyJohnDeere
       if id.nil? then
         return nil
       else
-        return self.new({"id" => id}.merge(body).stringify_keys)
+        return self.new(HashUtils.deep_stringify_keys({"id" => id}.merge(body)))
       end
     end
 

@@ -46,6 +46,7 @@ class TestMapLayerSummary < Minitest::Test
       ["key" => "val"],
       Time.parse("2016-01-02T16:14:23.421Z")
     )
-    assert_equal MLS_ID, response
+    assert_equal MLS_ID, response.id
+    assert_equal ORGANIZATION_ID, response.organization_id
   end
 end

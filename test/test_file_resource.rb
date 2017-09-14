@@ -1,6 +1,6 @@
 require File.expand_path('../test_helper', __FILE__)
 
-class TestMapLayer < Minitest::Test
+class TestFileResource < Minitest::Test
   FIXTURE = API_FIXTURES.fetch("file_resource")
   FIXTURE_FOR_LIST = API_FIXTURES.fetch("file_resources")
   FILE_RESOURCE_ID = FIXTURE["id"]
@@ -43,5 +43,6 @@ class TestMapLayer < Minitest::Test
       metadata: [MyJohnDeere::MetadataItem.new("key", "value")]
     )
     assert_equal MAP_LAYER_ID, response.id
+    assert_equal ORGANIZATION_ID, response.organization_id
   end
 end

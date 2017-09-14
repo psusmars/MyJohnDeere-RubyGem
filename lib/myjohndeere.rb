@@ -7,7 +7,6 @@ require 'logger'
 
 # Core extensions
 require 'myjohndeere/core_ext/string'
-require 'myjohndeere/core_ext/hash'
 
 # Errors
 require 'myjohndeere/errors'
@@ -20,6 +19,7 @@ require 'myjohndeere/rest_methods'
 require 'myjohndeere/json_attributes'
 require 'myjohndeere/requestable'
 require 'myjohndeere/util'
+require 'myjohndeere/hash_utils'
 require 'myjohndeere/response'
 require 'myjohndeere/access_token'
 require 'myjohndeere/list_object'
