@@ -7,6 +7,7 @@ require 'logger'
 
 # Core extensions
 require 'myjohndeere/core_ext/string'
+require 'myjohndeere/core_ext/hash'
 
 # Errors
 require 'myjohndeere/errors'
