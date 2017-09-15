@@ -59,6 +59,7 @@ module MyJohnDeere
         body: options[:body],
         etag: options[:etag])
       response =  nil
+      MyJohnDeere.logger.debug("Sending request with body: #{body}\n headers: #{headers}")
       if REQUEST_METHODS_TO_PUT_PARAMS_IN_URL.include?(method)
         response = self.oauth_access_token.send(method, path, headers)
       else
