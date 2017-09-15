@@ -7,7 +7,7 @@ spec = Gem::Specification.new do |s|
   s.version = MyJohnDeere::VERSION
   s.required_ruby_version = '>= 1.9.3'
   s.summary = 'Ruby bindings for the MyJohnDeere API'
-  s.description = ' MyJohnDeere is used to make data-driven decisions to maximize your return on every acre. This Ruby Gem is provided as a convenient way to access their API.'
+  s.description = ' MyJohnDeere allows you to access your John Deere Financial account, JDLink, Operations Center and many other applications from one convenient place. This Ruby Gem is provided as a convenient way to access their API.'
   s.author = 'Paul Susmarski'
   s.email = 'paul@susmarski.com'
   s.homepage = 'https://github.com/psusmars/myjohndeere'
