@@ -48,6 +48,7 @@ class TestMapLayer < Minitest::Test
       title: "blah",
       map_layer_id: "foo", map_legend_items: [MyJohnDeere::MapLegendItem.new("bar", 1, 2, "#0BA74A", 15.0)]
     )
-    assert_equal MAP_LAYER_ID, response
+    assert_equal MAP_LAYER_ID, response.id
+    assert_equal ORGANIZATION_ID, response.organization_id
   end
 end
