@@ -50,6 +50,20 @@ module MyJohnDeere
       def validate_access_token(access_token)
         raise ArgumentError.new("The first argument must be an #{AccessToken}") if !access_token.is_a?(AccessToken)
       end
+
+      def send_create(access_token, body, path_builder_options = {})
+        response = access_token.execute_request(:post, 
+          build_resouce_base_path!(self.list_resource_path, path_builder_options),
+          body: body
+        )
+        #{"Content-Type"=>"text/plain", "X-Deere-Handling-Server"=>"ldxtc3", "X-Frame-Options"=>"SAMEORIGIN", "Location"=>"https://sandboxapi.deere.com/platform/mapLayers/e2711205-c5df-445e-aad5-81eaf9090e6c", "X-Deere-Elapsed-Ms"=>"162", "Vary"=>"Accept-Encoding", "Expires"=>"Thu, 14 Sep 2017 15:52:24 GMT", "Cache-Control"=>"max-age=0, no-cache", "Pragma"=>"no-cache", "Date"=>"Thu, 14 Sep 2017 15:52:24 GMT", "Transfer-Encoding"=>"chunked", "Connection"=>"close, Transfer-Encoding"}
+        id = get_created_id_from_response_headers(self.base_jd_resource, response)
+        if id.nil? then
+          return nil
+        else
+          return self.new(HashUtils.deep_stringify_keys({"id" => id}.merge(body)))
+        end
+      end
     end
      
     module InstanceMethods
