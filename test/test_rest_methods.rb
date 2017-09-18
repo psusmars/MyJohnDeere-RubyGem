@@ -24,6 +24,19 @@ class TestRestMethods < Minitest::Test
     assert_equal "something", organizations.etag
   end
 
+  def test_build_resource_base_path
+    resource_path = "blah"
+    assert_equal "blah", MyJohnDeere::Organization.build_resource_base_path!("blah", {})
+    resource_path = "blah%{x_id}"
+    options = {x: 5, x_id: 1}
+    assert_equal "blah1", MyJohnDeere::Organization.build_resource_base_path!(resource_path, options)
+    assert_equal({x: 5}, options)
+
+    assert_raises ArgumentError do
+      MyJohnDeere::Organization.build_resource_base_path!(resource_path, {})
+    end
+  end
+
   def test_list_with_body
     stub_request(:get, /organizations;start=0;count=1/).
       with(query: {embed: "boundaries"}).
