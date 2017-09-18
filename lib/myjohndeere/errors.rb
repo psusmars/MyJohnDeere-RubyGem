@@ -47,6 +47,10 @@ module MyJohnDeere
   class PermissionError < MyJohnDeereError
   end
 
+  # Raised when accessing a non-existent resource
+  class InvalidRequestError < MyJohnDeereError
+  end
+
   # Raised when too many requests are being made
   class RateLimitError < MyJohnDeereError
   end
