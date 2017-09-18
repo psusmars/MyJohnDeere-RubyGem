@@ -67,13 +67,7 @@ module MyJohnDeere
         response = self.oauth_access_token.send(method, path, body, headers)
       end
       MyJohnDeere.logger.info("JohnDeere token response: #{response.body}")
-      # if response.code == "401"
-      #   self.notify_on_destroy = true
-      #   # we are no longer authorized
-      #   self.destroy
-      #   logger.info("JohnDeere token destroyed: #{self.persisted?}, errors: #{self.errors.full_messages}")
-      # end
-      # return response
+      Util.handle_response_error_codes(response)
       return Response.new(response)
     end
   end

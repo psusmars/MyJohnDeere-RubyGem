@@ -47,6 +47,16 @@ class TestAccessToken < Minitest::Test
     assert_equal expected_secret, at.secret
   end
 
+  def test_send_request_with_bad_responses
+    at = default_access_token()
+    stub_request(:get, "https://sandboxapi.deere.com/platform/").
+      to_return(status: 403, body: "Stuff")
+
+    assert_raises MyJohnDeere::PermissionError do
+      at.execute_request(:get, "/")
+    end
+  end
+
   def test_send_get_request
     at = default_access_token()
     expected_json = API_FIXTURES.fetch("api_catalog")

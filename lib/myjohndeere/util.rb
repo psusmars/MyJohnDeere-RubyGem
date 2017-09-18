@@ -50,5 +50,36 @@ module MyJohnDeere
 
       return path, headers, body
     end
+
+    def self.handle_response_error_codes(response)
+      headers = response.to_hash
+      code = response.code.to_i
+      body = response.body
+      error = nil
+      case code
+      when 503
+        error = ServerBusyError
+      when 400, 404
+        error = InvalidRequestError
+      when 401
+        error = AuthenticationError
+      when 403
+        error = PermissionError
+      when 429
+        error = RateLimitError
+      when 500
+        error = InternalServerError
+      end
+        
+      if error.nil? then
+        return
+      else
+        error = error.new(
+          http_status: code, http_body: body,
+          http_headers: headers)
+        error.response = response
+        raise error
+      end
+    end
   end
 end
