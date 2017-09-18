@@ -49,11 +49,21 @@ class TestAccessToken < Minitest::Test
 
   def test_send_request_with_bad_responses
     at = default_access_token()
-    stub_request(:get, "https://sandboxapi.deere.com/platform/").
-      to_return(status: 403, body: "Stuff")
+    code_and_error = [[503, MyJohnDeere::ServerBusyError],
+    [400, MyJohnDeere::InvalidRequestError],
+    [404, MyJohnDeere::InvalidRequestError],
+    [401, MyJohnDeere::AuthenticationError],
+    [403, MyJohnDeere::PermissionError],
+    [429, MyJohnDeere::RateLimitError],
+    [500, MyJohnDeere::InternalServerError]]
 
-    assert_raises MyJohnDeere::PermissionError do
-      at.execute_request(:get, "/")
+    code_and_error.each do |c_e|
+      stub_request(:get, //).
+        to_return(status: c_e[0], body: "Stuff")
+
+      assert_raises c_e[1], "Expected #{c_e[0]} to raise #{c_e[1]}" do
+        at.execute_request(:get, "/")
+      end
     end
   end
 
