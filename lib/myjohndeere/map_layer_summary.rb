@@ -10,7 +10,7 @@ module MyJohnDeere
     end
 
     def self.create(access_token, organization_id, field_id, 
-        title, caption, metadata = [], date_created=nil)
+        title, caption, metadata: [], date_created: nil)
       body = {
         title: title,
         text: caption,

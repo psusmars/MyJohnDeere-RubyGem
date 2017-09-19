@@ -43,8 +43,21 @@ class TestMapLayerSummary < Minitest::Test
       FIELD_ID,
       "Test number 2",
       "Hello from farm lens again",
-      [MyJohnDeere::MetadataItem.new("key", "val")],
-      Time.parse("2016-01-02T16:14:23.421Z")
+      metadata: [MyJohnDeere::MetadataItem.new("key", "val")],
+      date_created: Time.parse("2016-01-02T16:14:23.421Z")
+    )
+    assert_equal MLS_ID, response.id
+    assert_equal ORGANIZATION_ID, response.organization_id
+  end
+
+  def test_create_with_empty_optionals
+    stub_request(:post, /\/organizations\/#{ORGANIZATION_ID}\/fields\/#{FIELD_ID}\/mapLayerSummaries/).
+      to_return(status: 201, headers: {"Location"=>"https://sandboxapi.deere.com/platform/mapLayerSummaries/#{MLS_ID}"})
+    response = MyJohnDeere::MapLayerSummary.create(default_access_token, 
+      ORGANIZATION_ID,
+      FIELD_ID,
+      "Test number 2",
+      "Hello from farm lens again"
     )
     assert_equal MLS_ID, response.id
     assert_equal ORGANIZATION_ID, response.organization_id
