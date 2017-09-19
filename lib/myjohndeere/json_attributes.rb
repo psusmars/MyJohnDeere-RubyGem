@@ -29,6 +29,14 @@ module MyJohnDeere
           instance_variable_set("@#{attrib.underscore}", val)
         end
       end
+
+      def to_s
+        the_hash = {}
+        self.class.json_attributes.each do |attrib|
+          the_hash[attrib] = send(attrib.to_s.underscore)
+        end
+        return "#{self.class}: #{the_hash}"
+      end
     end
     
     def self.included(receiver)

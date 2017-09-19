@@ -24,6 +24,15 @@ class TestMapLayer < Minitest::Test
       ml.legends["ranges"][0].to_hash)
   end
 
+  def test_to_s
+    stub_request(:get, /\/mapLayers\/#{FIXTURE["id"]}/).
+      to_return(status: 200, body: FIXTURE.to_json)
+
+    ml = MyJohnDeere::MapLayer.retrieve(default_access_token, FIXTURE["id"])
+
+    assert_equal "MyJohnDeere::MapLayer: {:id=>\"83ks9gh3-29fj-9302-837j-92jlsk92jd095kd\", :title=>\"The title on the map layer\", :extent=>{\"minimumLatitude\"=>41.76073, \"maximumLatitude\"=>41.771366, \"minimumLongitude\"=>-93.488106, \"maximumLongitude\"=>-93.4837}, :legends=>{\"unitId\"=>\"seeds1ha-1\", \"ranges\"=>[#<MyJohnDeere::MapLegendItem:0xXXXXXX @label=\"Some Label\", @minimum=87300, @maximum=87300, @hex_color=\"#0BA74A\", @percent=0.13>]}}", ml.to_s
+  end
+
   def test_list
     stub_request(:get, /mapLayerSummaries\/#{MLS_ID}\/mapLayers/).
       to_return(status: 200, body: FIXTURE_FOR_LIST.to_json)
