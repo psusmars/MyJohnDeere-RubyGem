@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    myjohndeere (0.0.5)
+    myjohndeere (0.0.6)
       oauth (>= 0.5.3)
 
 GEM
