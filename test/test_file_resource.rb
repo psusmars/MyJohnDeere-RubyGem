@@ -35,14 +35,14 @@ class TestFileResource < Minitest::Test
     stub_request(:post, /mapLayers\/#{MAP_LAYER_ID}\/fileResources/).
       with(body: expected_body,
        headers: {'Accept'=>'application/vnd.deere.axiom.v3+json', 'Content-Length'=>expected_body.length, 'Content-Type'=>'application/vnd.deere.axiom.v3+json'}).
-      to_return(status: 201, headers: {"Location"=>"https://sandboxapi.deere.com/platform/fileResources/#{MAP_LAYER_ID}"})
+      to_return(status: 201, headers: {"Location"=>"https://sandboxapi.deere.com/platform/fileResources/#{FILE_RESOURCE_ID}"})
     response = MyJohnDeere::FileResource.create(default_access_token, 
       ORGANIZATION_ID,
       MAP_LAYER_ID,
       file_type: :zip,
       metadata: [MyJohnDeere::MetadataItem.new("key", "value")]
     )
-    assert_equal MAP_LAYER_ID, response.id
+    assert_equal FILE_RESOURCE_ID, response.id
     assert_equal ORGANIZATION_ID, response.organization_id
   end
 end
