@@ -30,6 +30,35 @@ class TestFileResource < Minitest::Test
     assert_equal MyJohnDeere::FileResource, file_resources.data[0].class
   end
 
+  def test_created_argument_checking
+    assert_raises ArgumentError do
+      MyJohnDeere::FileResource.create(default_access_token, 
+        nil,
+        MAP_LAYER_ID,
+        file_type: :zip,
+        metadata: [MyJohnDeere::MetadataItem.new("key", "value")]
+      )
+    end
+
+    assert_raises ArgumentError do
+      MyJohnDeere::FileResource.create(default_access_token, 
+        ORGANIZATION_ID,
+        nil,
+        file_type: :zip,
+        metadata: [MyJohnDeere::MetadataItem.new("key", "value")]
+      )
+    end
+
+    assert_raises ArgumentError do
+      MyJohnDeere::FileResource.create(default_access_token, 
+        ORGANIZATION_ID,
+        MAP_LAYER_ID,
+        file_type: nil,
+        metadata: [MyJohnDeere::MetadataItem.new("key", "value")]
+      )
+    end
+  end
+
   def test_create
     expected_body = "{\"links\":[{\"rel\":\"owningOrganization\",\"uri\":\"https://sandboxapi.deere.com/platform/organizations/1234\"}],\"mimeType\":\"application/zip\",\"metadata\":[{\"key\":\"key\",\"value\":\"value\"}]}"
     stub_request(:post, /mapLayers\/#{MAP_LAYER_ID}\/fileResources/).

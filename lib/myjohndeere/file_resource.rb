@@ -12,6 +12,8 @@ module MyJohnDeere
     def self.create(access_token, organization_id, map_layer_id, file_type: nil,
         metadata: [])
       raise ArgumentError.new("You must pass a file_type") if file_type.nil?
+      raise ArgumentError.new("You must pass a valid organization id") if organization_id.nil?
+      raise ArgumentError.new("You must pass a valid map layer id") if map_layer_id.nil?
 
       case file_type
       when :png
