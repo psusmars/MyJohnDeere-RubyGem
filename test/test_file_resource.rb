@@ -74,4 +74,15 @@ class TestFileResource < Minitest::Test
     assert_equal FILE_RESOURCE_ID, response.id
     assert_equal ORGANIZATION_ID, response.organization_id
   end
+
+  def test_upload_file
+    stub_request(:put, /fileResources\/#{FILE_RESOURCE_ID}/).
+      with(headers: {'Content-Length'=>'4407', 'Content-Type'=>'application/octet-stream'}).
+      to_return(status: 204)
+    
+    success = MyJohnDeere::FileResource.upload_file(default_access_token, FILE_RESOURCE_ID,
+      "#{PROJECT_ROOT}/spec/colored.png")
+
+    assert success
+  end
 end
