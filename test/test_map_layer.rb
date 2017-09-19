@@ -30,7 +30,11 @@ class TestMapLayer < Minitest::Test
 
     ml = MyJohnDeere::MapLayer.retrieve(default_access_token, FIXTURE["id"])
 
-    assert_equal "MyJohnDeere::MapLayer: {:id=>\"83ks9gh3-29fj-9302-837j-92jlsk92jd095kd\", :title=>\"The title on the map layer\", :extent=>{\"minimumLatitude\"=>41.76073, \"maximumLatitude\"=>41.771366, \"minimumLongitude\"=>-93.488106, \"maximumLongitude\"=>-93.4837}, :legends=>{\"unitId\"=>\"seeds1ha-1\", \"ranges\"=>[#<MyJohnDeere::MapLegendItem:0xXXXXXX @label=\"Some Label\", @minimum=87300, @maximum=87300, @hex_color=\"#0BA74A\", @percent=0.13>]}}", ml.to_s
+    resulting_string = ml.to_s
+    assert resulting_string.include?(MAP_LAYER_ID)
+    assert resulting_string.include?("legends")
+    assert resulting_string.include?("ranges")
+    assert resulting_string.include?("@hex_color=\"#0BA74A\"")
   end
 
   def test_list
