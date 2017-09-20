@@ -14,6 +14,17 @@ class TestRestMethods < Minitest::Test
     end
   end
 
+  def test_delete
+    stub_request(:delete, /mapLayerSummaries/).
+      to_return(status: 204)
+
+    assert MyJohnDeere::MapLayerSummary.delete(default_access_token, "foobar")
+
+    assert_raises MyJohnDeere::UnsupportedRequestError do
+      MyJohnDeere::Organization.delete(default_access_token, "foobar")
+    end
+  end
+
   def test_list_with_etag
     stub_request(:get, /organizations/).
       with(headers: {MyJohnDeere::ETAG_HEADER_KEY => ""}).

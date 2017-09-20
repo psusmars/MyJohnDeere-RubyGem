@@ -1,6 +1,7 @@
 module MyJohnDeere 
   module RESTMethods
     module ClassMethods
+      attr_accessor :supports_delete
       attr_accessor :base_jd_resource
       attr_accessor :retrieve_resource_path
       attr_accessor :list_resource_path
@@ -35,6 +36,13 @@ module MyJohnDeere
           options)
 
         return new(response.data, access_token)
+      end
+
+      def delete(access_token, id)
+        raise UnsupportedRequestError.new("Delete is not supported by this resource") if !self.supports_delete
+
+        response = access_token.execute_request(:delete, "#{self.base_jd_resource}/#{id}")
+        return response.code == 204
       end
 
       def build_resource_base_path!(resource_path, options = {})

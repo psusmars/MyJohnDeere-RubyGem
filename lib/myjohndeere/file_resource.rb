@@ -1,5 +1,6 @@
 module MyJohnDeere
   class FileResource < OrganizationOwnedResource
+    self.supports_delete = true
     self.base_jd_resource = "fileResources"
     self.list_resource_path = "mapLayers/%{map_layer_id}/#{self.base_jd_resource}"
     self.retrieve_resource_path = self.base_jd_resource
@@ -38,7 +39,7 @@ module MyJohnDeere
     def self.upload_file(access_token, file_resource_id, file_path)
       raise ArgumentError.new("You must pass an existing file") if !File.exists?(file_path)
       raise ArgumentError.new("You must pass a valid file_resource_id") if file_resource_id.nil?
-      
+
       File.open(file_path, "rb:UTF-8") do |f|
           body = f.read()
           response = access_token.execute_request(:put,

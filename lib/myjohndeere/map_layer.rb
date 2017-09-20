@@ -1,5 +1,6 @@
 module MyJohnDeere
   class MapLayer < OrganizationOwnedResource
+    self.supports_delete = true
     self.base_jd_resource = "mapLayers"
     self.list_resource_path = "mapLayerSummaries/%{map_layer_summary_id}/#{self.base_jd_resource}"
     self.retrieve_resource_path = self.base_jd_resource

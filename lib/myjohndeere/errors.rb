@@ -33,6 +33,10 @@ module MyJohnDeere
     end
   end
 
+  # You're attempting to perform a request against a resource that is unsupported
+  class UnsupportedRequestError < MyJohnDeereError
+  end
+
   # Configuration error is raised when configuration hasn't been properly done
   class ConfigurationError < MyJohnDeereError
   end
