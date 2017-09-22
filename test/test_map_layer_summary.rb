@@ -33,7 +33,16 @@ class TestMapLayerSummary < Minitest::Test
   end
 
   def test_create
-    expected_body = "{\"title\":\"Test number 2\",\"text\":\"Hello from farm lens again\",\"links\":[{\"rel\":\"owningOrganization\",\"uri\":\"https://sandboxapi.deere.com/platform/organizations/1234\"},{\"rel\":\"contributionDefinition\",\"uri\":\"https://sandboxapi.deere.com/platform/foobar\"}],\"metadata\":[{\"key\":\"key\",\"value\":\"val\"}],\"dateCreated\":\"2016-01-02T16:14:23.421Z\"}"
+    expected_body = {"title"=>"Test number 2",
+     "text"=>"Hello from farm lens again",
+     "links"=>
+      [{"rel"=>"owningOrganization",
+        "uri"=>"https://sandboxapi.deere.com/platform/organizations/1234"},
+       {"rel"=>"contributionDefinition",
+        "uri"=>
+         "https://sandboxapi.deere.com/platform/contributionDefinitions/foobar"}],
+     "metadata"=>[{"key"=>"key", "value"=>"val"}],
+     "dateCreated"=>"2016-01-02T16:14:23.421Z"}.to_json
     stub_request(:post, /\/organizations\/#{ORGANIZATION_ID}\/fields\/#{FIELD_ID}\/mapLayerSummaries/).
       with(body: expected_body,
        headers: {'Accept'=>'application/vnd.deere.axiom.v3+json', 'Content-Length'=>expected_body.length, 'Content-Type'=>'application/vnd.deere.axiom.v3+json'}).

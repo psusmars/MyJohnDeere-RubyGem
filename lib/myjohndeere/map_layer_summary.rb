@@ -19,7 +19,7 @@ module MyJohnDeere
             owning_organization_link_item(organization_id),
             {
                rel: "contributionDefinition",
-               uri: "#{MyJohnDeere.configuration.endpoint}/#{MyJohnDeere.configuration.contribution_definition_id}"
+               uri: "#{MyJohnDeere.configuration.endpoint}/contributionDefinitions/#{MyJohnDeere.configuration.contribution_definition_id}"
             }
          ],
         metadata: metadata.map { |md| md.to_hash },
