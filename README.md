@@ -69,11 +69,14 @@ Assuming you've created a MyJohnDeere::AccessToken using something from above, t
 ``` ruby
 organizations = MyJohnDeere::Organization.list(access_token)
 
-organizations.each do |organization|
-    puts organization.fields.data
-end
+loop do
+  organizations.each do |organization|
+      puts organization.fields.data
+  end
 
-organizations.has_more?
+  break if !organizations.has_more?
+  organizations.next_page!
+end
 
 ```
 
