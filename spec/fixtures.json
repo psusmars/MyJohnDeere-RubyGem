@@ -1,43 +1,35 @@
 {
     "contribution_products" : {
-        "links":[
-          {
-           "rel":"self",
-           "uri":"https://sandboxapi.deere.com/platform/contributionDefinitions"
-          }
-        ],
-        "total":1,
-        "values":[
-          {
-           "@type":"ContributionDefinition",
-           "actionDefinitions":[
-                            {
-             "@type":"ActionDefinition",
-             "uri":"http://example.com/",
-             "title":"Title on the Link",
-             "actionType":"WINDOW",
-             "displayType":"BUTTON",
-             "displayLocation":"MAIN_DETAIL",
-             "masterData":"ORGANIZATION",
-             "actionIcon":"NO_ICON"
-            }
-
-           ],
-           "id":"9da4ae59-37dd-4fb1-a89f-0f906a307da3",
-           "links":[
+      "links": [
+        {
+          "rel": "self",
+          "uri": "https://sandboxapi.deere.com/platform/contributionProducts"
+        }
+      ],
+      "total": 1,
+      "values": [
+        {
+          "@type": "ContributionProduct",
+          "marketPlaceName": "PRODUCT_NAME",
+          "marketPlaceDescription": "PRODUCT_DESCRITPION",
+          "marketPlaceLogo": "https://jd-us01-isg-prod-system.s3.amazonaws.com/b2b/branding/32902911-9f40-41f3-99eb-b0638ed185y7",
+          "defaultLocale": "en-us",
+          "currentStatus": "APPROVED",
+          "id": "32902911-9f40-41f3-99eb-b0638ed185y7",
+          "links": [
             {
-             "@type":"Link",
-             "rel":"self",
-             "uri":"https://sandboxapi.deere.com/platform/contributionDefinitions/9da4ae59-37dd-4fb1-a89f-0f906a307da3"
+              "@type": "Link",
+              "rel": "self",
+              "uri": "https://sandboxapi.deere.com/platform/contributionProducts/32902911-9f40-41f3-99eb-b0638ed185y7"
             },
-            {
+           {
              "@type":"Link",
-             "rel":"contributionProduct",
-             "uri":"https://sandboxapi.deere.com/platform/contributionProducts/32902911-9f40-41f3-99eb-b0638ed188a9"
-            }
-           ]
-          }  
-        ]
+             "rel":"contributionDefinition",
+             "uri":" https://sandboxapi.deere.com/platform/contributionProducts/355678a3-e789-48db-9e90-81ae05da114c/contributionDefinitions"
+           }
+          ]
+        }
+      ]
     },
     "contribution_product" : {
       "@type": "ContributionProduct",
