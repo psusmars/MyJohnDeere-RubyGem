@@ -25,6 +25,20 @@ class TestRestMethods < Minitest::Test
     end
   end
 
+  def test_deleted_object_with_etag
+    etag_val = "something"
+    new_etag = "something2"
+    stub_request(:get, /organizations/).
+      with(headers: {MyJohnDeere::ETAG_HEADER_KEY => etag_val}).
+      to_return(status: 200, body: API_FIXTURES["deleted_organization"].to_json(),
+        headers: {MyJohnDeere::ETAG_HEADER_KEY=>new_etag})
+    
+    organizations = MyJohnDeere::Organization.list(default_access_token, etag: etag_val)
+
+    assert organizations.data.first.deleted
+    assert_equal new_etag, organizations.etag
+  end
+
   def test_list_with_etag
     stub_request(:get, /organizations/).
       with(headers: {MyJohnDeere::ETAG_HEADER_KEY => ""}).
