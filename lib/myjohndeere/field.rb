@@ -6,6 +6,7 @@ module MyJohnDeere
     attributes_to_pull_from_json(:id, :name, :boundaries)
 
     def initialize(json_object, access_token = nil)
+      @boundary = nil
       super(json_object, access_token)
       boundaries = json_object["boundaries"]
       if boundaries && boundaries.length > 0 then
@@ -14,8 +15,14 @@ module MyJohnDeere
       end
     end
 
+    # Will return whether or not the boundary has been set,
+    # useful if you're expecting embedded boundaries
+    def boundary_unset?
+      return @boundary.nil?
+    end
+
     def boundary
-      if @boundary.nil? then
+      if self.boundary_unset? then
         @boundary = Boundary.retrieve(self.access_token, field_id: self.id, organization_id: self.organization_id)
       end
       return @boundary

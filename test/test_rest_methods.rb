@@ -63,11 +63,12 @@ class TestRestMethods < Minitest::Test
   end
 
   def test_list_with_body
+    embed = {embed: "boundaries"}
     stub_request(:get, /organizations/).
-      with(query: {embed: "boundaries"},
+      with(query: embed,
         headers: {MyJohnDeere::ETAG_HEADER_KEY=>""}).
       to_return(status: 200, body: LIST_FIXTURE.to_json())
-    organizations = MyJohnDeere::Organization.list(default_access_token, count: 1, etag: "", body: {embed: "boundaries"})
-    assert_equal({:embed=>"boundaries"}, organizations.options[:body])
+    organizations = MyJohnDeere::Organization.list(default_access_token, count: 1, etag: "", body: embed)
+    assert_equal(embed, organizations.options[:body])
   end
 end

@@ -35,6 +35,13 @@ class TestField < Minitest::Test
     assert_equal field.id, field.boundary.field_id
   end
 
+  def test_boundary_unset
+    field = MyJohnDeere::Field.new({})
+    assert field.boundary_unset?
+    field.boundary = MyJohnDeere::Boundary.new({}, nil, 1)
+    assert !field.boundary_unset?
+  end
+
   def test_list()
     stub_request(:get, /organizations\/#{ORGANIZATION_FIXTURE["id"]}\/fields/).
       to_return(status: 200, body: FIXTURE_FOR_LIST.to_json)
