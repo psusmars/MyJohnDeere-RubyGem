@@ -5,7 +5,8 @@ class TestListObject < Minitest::Test
     data = Array.new(3, API_FIXTURES["organization"])
     list = MyJohnDeere::ListObject.new(MyJohnDeere::Organization, 
       default_access_token, 
-      {"values" => data})
+      {"values" => data},
+      200)
 
     list.each_with_index do |x, i|
       assert_equal data[i]["id"], x.id
@@ -31,12 +32,25 @@ class TestListObject < Minitest::Test
     assert !list.has_more?, "The data is equal to the total"
   end
 
+  def test_not_modified_with_etag
+    etag_val = "something"
+    new_etag = "something2"
+    # Validate that the etag header is getting propagated to the next request
+    stub_request(:get, /organizations/).
+      with(headers: {MyJohnDeere::ETAG_HEADER_KEY=>etag_val}).
+      to_return(status: 304, body: '', headers: {MyJohnDeere::ETAG_HEADER_KEY=>new_etag})
+    organizations = MyJohnDeere::Organization.list(default_access_token, etag: etag_val)
+
+    assert_equal 0, organizations.data.count
+    assert organizations.not_modified?
+  end
+
   def test_get_next_page_with_etag
     # etag behavior gets the entire list.
     test_json = API_FIXTURES["organizations"]
     existing_data = Array.new(test_json["total"]-1, test_json["values"][0])
     list = MyJohnDeere::ListObject.new(MyJohnDeere::Organization, default_access_token, 
-      {"values" => existing_data}, options: {
+      {"values" => existing_data}, 200, options: {
         start: 0, count: existing_data.length, etag: ""})
     assert list.using_etag?
     assert !list.has_more?
@@ -54,12 +68,11 @@ class TestListObject < Minitest::Test
     test_json = API_FIXTURES["organizations"]
     existing_data = (1..(test_json["total"]-1)).to_a
     list = MyJohnDeere::ListObject.new(MyJohnDeere::Organization, default_access_token, 
-      test_json, options: {start: 0,
+      test_json, 200, options: {start: 0,
       count: existing_data.length})
     assert list.has_more?
     assert !list.using_etag?
 
-    # Validate that the etag header is getting propagated to the next request
     stub_request(:get, /organizations;start=#{existing_data.count};count=#{existing_data.count}/).
       with(headers: {'Accept'=>'application/vnd.deere.axiom.v3+json'}).
       to_return(status: 200, body: test_json.to_json())

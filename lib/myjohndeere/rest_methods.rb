@@ -28,6 +28,7 @@ module MyJohnDeere
           self,
           access_token,
           response.data,
+          response.code,
           options: options.merge(
             etag: response.http_headers[MyJohnDeere::ETAG_HEADER_KEY]
           )
