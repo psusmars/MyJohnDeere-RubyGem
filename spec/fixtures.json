@@ -1,4 +1,77 @@
 {
+    "files" : {
+       "links": [
+          {
+             "rel": "self",
+             "uri": "https://sandboxapi.deere.com/platform/files"
+          },
+          {
+             "rel": "nextPage",
+             "uri": "https://sandboxapi.deere.com/platform/files;start=10;count=10"
+          }
+       ],
+       "total": 1534,
+       "values": [
+          {
+             "links": [
+                {
+                   "rel": "owningOrganization",
+                   "uri": "https://sandboxapi.deere.com/platform/organizations/1234"
+                },
+                {
+                   "rel": "partnerships",
+                   "uri": "https://sandboxapi.deere.com/platform/files/466578633/partnerships"
+                },
+                {
+                   "rel": "self",
+                   "uri": "https://sandboxapi.deere.com/platform/files/466578633"
+                }
+             ],
+             "id": "577499742",
+             "name": "back40.zip",
+             "type": "SETUP",
+             "createdTime": "2013-01-04T14:08:51.104Z",
+             "modifiedTime": "2013-01-04T14:08:51.104Z",
+             "nativeSize": "72946",
+             "source": "JohnDoe",
+             "transferPending": "false",
+             "visibleViaShare": "owned",
+             "shared": "false",
+             "status": "UPLOAD_PENDING",
+             "archived": "false",
+             "new": "true"
+          }
+       ]
+    },
+    "file" : {
+       "links": [
+          {
+             "rel": "owningOrganization",
+             "uri": "https://sandboxapi.deere.com/platform/organizations/1234"
+          },
+          {
+             "rel": "partnerships",
+             "uri": "https://sandboxapi.deere.com/platform/files/466578633/partnerships"
+          },
+          {
+             "rel": "self",
+             "uri": "https://sandboxapi.deere.com/platform/files/577499742"
+          }
+       ],
+       "id": "577499742",
+       "name": "back40.zip",
+       "type": "SETUP",
+       "createdTime": "2015-02-03T10:42:24.282Z",
+       "modifiedTime": "2015-02-03T10:42:24.282Z",
+       "nativeSize": "72946",
+       "source": "JohnDoe",
+       "transferPending": "false",
+       "visibleViaShare": "owned",
+       "shared": "false",
+       "status": "UPLOAD_PENDING",
+       "archived": "false",
+       "new": "true"
+    },
     "contribution_products" : {
       "links": [
         {

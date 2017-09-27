@@ -28,6 +28,7 @@ require 'myjohndeere/organization_owned_resource'
 require 'myjohndeere/api_support_item'
 require 'myjohndeere/contribution_activation'
 require 'myjohndeere/contribution_product'
+require 'myjohndeere/file'
 
 # API Sub-classes
 require 'myjohndeere/map_legend_item'
