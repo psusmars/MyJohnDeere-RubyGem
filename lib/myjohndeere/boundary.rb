@@ -10,7 +10,6 @@ module MyJohnDeere
       super(json_object, access_token)
       self.field_id = field_id
       self.active = self.active.to_s.downcase == "true"
-      self.multipolygons = json_object["multipolygons"]
       # This doesn't exist currently, not sure why
       self.field_id ||= extract_link_with_rel_from_list("fields", /\/(\d+)\/(.+?)\/fields\Z/)
     end
