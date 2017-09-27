@@ -13,6 +13,7 @@ class TestContributionActivation < Minitest::Test
     ca = MyJohnDeere::ContributionActivation.retrieve(default_access_token, 
       CONTRIBUTION_ACTIVATION_ID)
     assert_equal CONTRIBUTION_ACTIVATION_ID, ca.id
+    assert_equal CONTRIBUTION_PRODUCT_ID, ca.contribution_product_id
     assert_equal "ACTIVATED", ca.activation_status
   end
 

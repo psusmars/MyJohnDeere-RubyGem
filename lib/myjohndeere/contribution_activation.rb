@@ -3,6 +3,7 @@ module MyJohnDeere
     self.base_jd_resource = "contributionActivations"
     self.list_resource_path = "organizations/%{organization_id}/#{self.base_jd_resource}"
     self.retrieve_resource_path = self.base_jd_resource
+    attr_accessor :contribution_product_id
     attributes_to_pull_from_json(:activationStatus, :id)
 
     def initialize(json_object, access_token = nil)
@@ -10,6 +11,7 @@ module MyJohnDeere
       if self.id.nil? then
         self.id = extract_link_with_rel_from_list("self", /contributionActivations\/([^\/]+)\Z/)
       end
+      self.contribution_product_id = extract_link_with_rel_from_list("contributionProduct", /#{ContributionProduct.base_jd_resource}\/([^\/]+)\Z/)
     end
 
     def self.create(access_token, organization_id, contribution_product_id, activated: true)
