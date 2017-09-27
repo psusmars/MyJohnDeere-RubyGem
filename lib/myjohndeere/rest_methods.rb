@@ -10,9 +10,14 @@ module MyJohnDeere
       def list(access_token, options = {})
         validate_access_token(access_token)
         options = {count: 10, start: 0, etag: nil}.merge(options)
+        if !options[:etag].nil? then
+          options.delete(:count)
+          options.delete(:start)
+        end
         options[:body] ||= {}
         # The count and start are in this list,so move them into the body
         SPECIAL_BODY_PARAMETERS.each do |sbp|
+          next if options[sbp].nil?
           options[:body][sbp] = options[sbp]
         end
 

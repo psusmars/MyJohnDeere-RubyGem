@@ -28,7 +28,7 @@ class TestRestMethods < Minitest::Test
   def test_deleted_object_with_etag
     etag_val = "something"
     new_etag = "something2"
-    stub_request(:get, /organizations/).
+    stub_request(:get, /organizations\Z/).
       with(headers: {MyJohnDeere::ETAG_HEADER_KEY => etag_val}).
       to_return(status: 200, body: API_FIXTURES["deleted_organization"].to_json(),
         headers: {MyJohnDeere::ETAG_HEADER_KEY=>new_etag})
@@ -63,8 +63,9 @@ class TestRestMethods < Minitest::Test
   end
 
   def test_list_with_body
-    stub_request(:get, /organizations;start=0;count=1/).
-      with(query: {embed: "boundaries"}).
+    stub_request(:get, /organizations/).
+      with(query: {embed: "boundaries"},
+        headers: {MyJohnDeere::ETAG_HEADER_KEY=>""}).
       to_return(status: 200, body: LIST_FIXTURE.to_json())
     organizations = MyJohnDeere::Organization.list(default_access_token, count: 1, etag: "", body: {embed: "boundaries"})
     assert_equal({:embed=>"boundaries"}, organizations.options[:body])
