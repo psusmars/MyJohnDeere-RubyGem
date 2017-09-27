@@ -23,7 +23,7 @@ class TestContributionProduct < Minitest::Test
       cp.current_status
   end
 
-  def test_retrieve()
+  def test_list()
     stub_request(:get, /\/contributionProducts/).
       to_return(status: 200, body: API_FIXTURES.fetch("contribution_products").to_json)
 
