@@ -2,6 +2,16 @@
 
 The MyJohnDeere Ruby library provides convenient access to the MyJohnDeere API from applications written in the Ruby language. It includes a pre-defined set of classes for API resources that are available currently from the API. You will need to get access by going to the [JohnDeere Developer page](https://developer.deere.com/#!welcome). The interface utilizes OAUTH 1.0.
 
+## Installation
+
+You don't need this source code unless you want to modify the gem. If you just want to use the package, just run:
+
+`gem install myjohndeere`
+
+If you want to build the gem from source:
+
+`gem build myjohndeere.gemspec`
+
 ## Usage
 
 ### Configuration
@@ -82,13 +92,13 @@ end
 
 ## Listable Objects
 
-MyJohnDeere returns either pages of objects that will automatically be iterated through 10 at a time *or* you'll receive the entirety of the resource if you specify an etag token. **The default behavior is for pagination.**
+MyJohnDeere returns either pages of objects that will automatically be iterated through 10 at a time *or* you'll receive the entirety of the resource if you specify an ETAG token. **The default behavior is for pagination.**
 
 **If using the paginated approach**: Use `more_pages?` on the listable object to see if there are more pages to be acquired by using `next_page!`. This will modify the `.start` and `.count` values on the list object. These automatically increase with each `next_page`.
 
-**If using the etag approach**: The entirety of the data set will be returned to you and on the list object you'll want to call `list.etag` and store this locally. You can then use this on future requests to see if anything has changed from the original request.
+**If using the ETAG approach**: The entirety of the data set will be returned to you and on the list object you'll want to call `list.etag` and store this locally. You can then use this on future requests to see if anything has changed from the original request. To use it: `MyJohnDeere::Organization.list(access_token, etag: '')`
 
-If you for some reason specify both, the etag will be the assumed behavior.
+If you for some reason specify both, the ETAG will be the assumed behavior.
 
 The raw data can be acquired by using `.data` on a listable object.
 
