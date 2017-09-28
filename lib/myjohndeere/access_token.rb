@@ -28,8 +28,8 @@ module MyJohnDeere
       oauth_token_options = [:oauth_access_token_token, :oauth_access_token_secret]
       if request_token_options.all? { |i| options.key?(i) } then
         request_token = OAuth::RequestToken.from_hash(self.class.oauth_consumer, {
-          oauth_token: options[:token],
-          oauth_token_secret: options[:token_secret]
+          oauth_token: options[:request_token_token],
+          oauth_token_secret: options[:request_token_secret]
         })
         self.oauth_access_token = request_token.get_access_token(oauth_verifier: options[:verifier_code])
       elsif oauth_token_options.all? { |i| options.key?(i) } then
