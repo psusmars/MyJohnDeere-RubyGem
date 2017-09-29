@@ -11,6 +11,10 @@ module MyJohnDeere
       end
     end
 
+    def has_access_to?(rel_link_name)
+      self.links.any? {|i| i["rel"] == rel_link_name}
+    end
+
     def extract_link_with_rel_from_list(rel_target, regex_to_capture_item)
       link = self.links.detect { |l| l["rel"] == rel_target }
       if link then

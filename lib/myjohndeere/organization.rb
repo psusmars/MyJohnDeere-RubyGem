@@ -10,11 +10,11 @@ module MyJohnDeere
     end
 
     def has_access_to_boundaries?
-      self.links.any? {|i| i["rel"] == "boundaries"}
+      self.has_access_to?("boundaries")
     end
 
     def has_access_to_fields?
-      self.links.any? {|i| i["rel"] == "fields"}
+      self.has_access_to?("fields")
     end
 
     def fields

@@ -12,4 +12,15 @@ class TestAccessToken < Minitest::Test
       MyJohnDeere::Requestable.new({}, "something")
     end
   end
+
+  def test_has_access_to
+    r = MyJohnDeere::Requestable.new({"links" => [
+    {
+     "rel" => "addresses",
+     "uri" => "https://sandboxapi.deere.com/platform/organizations/1234/addresses"
+    }]})
+
+    assert r.has_access_to?("addresses")
+    assert !r.has_access_to?("something_else")
+  end
 end
