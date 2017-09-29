@@ -9,6 +9,14 @@ module MyJohnDeere
       super(json_object, access_token)
     end
 
+    def has_access_to_boundaries?
+      self.links.any? {|i| i["rel"] == "boundaries"}
+    end
+
+    def has_access_to_fields?
+      self.links.any? {|i| i["rel"] == "fields"}
+    end
+
     def fields
       return MyJohnDeere::Field.list(self.access_token, organization_id: self.id)
     end
