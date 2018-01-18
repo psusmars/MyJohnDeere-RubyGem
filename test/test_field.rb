@@ -42,7 +42,7 @@ class TestField < Minitest::Test
     assert !field.boundary_unset?
   end
 
-  def test_creation_with_multiple_boundaries
+  def test_retrieval_with_multiple_boundaries
     fixture = API_FIXTURES["field_with_multiple_boundaries"]
 
     stub_request(:get, /\/organizations\/#{ORGANIZATION_FIXTURE["id"]}\/fields\/#{fixture["id"]}/).
@@ -54,6 +54,20 @@ class TestField < Minitest::Test
       body: {embed: "boundaries"})
 
     assert_equal fixture["boundaries"][1]["id"], field.boundary.id
+  end
+
+  def test_retrieval_with_multiple_active_boundaries
+    fixture = API_FIXTURES["field_with_multiple_active_boundaries"]
+
+    stub_request(:get, /\/organizations\/#{ORGANIZATION_FIXTURE["id"]}\/fields\/#{fixture["id"]}/).
+      with(query: {embed: "boundaries"}).
+      to_return(status: 200, body: fixture.to_json)
+
+    assert_raises MyJohnDeere::MyJohnDeereError, "At the moment I don't have a use case where this would happen" do
+      field = MyJohnDeere::Field.retrieve(default_access_token, 
+        fixture["id"], organization_id: ORGANIZATION_FIXTURE["id"],
+        body: {embed: "boundaries"})
+    end
   end
 
   def test_list()

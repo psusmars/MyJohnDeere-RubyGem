@@ -12,9 +12,7 @@ module MyJohnDeere
       if boundaries && boundaries.length > 0 then
         # If we embed, then we'll need to pass our id
         possible_boundaries = boundaries.map { |b_json| Boundary.new(b_json, access_token, self.id) }
-        self.boundary = possible_boundaries.find { |b| b.active && !b.deleted }
-        # Fallback to the first one then
-        self.boundary ||= possible_boundaries.first
+        self.boundary = find_first_active_boundary(possible_boundaries)
       end
     end
 
@@ -26,7 +24,8 @@ module MyJohnDeere
 
     def boundary
       if self.boundary_unset? then
-        @boundary = Boundary.retrieve(self.access_token, field_id: self.id, organization_id: self.organization_id)
+        boundaries = Boundary.list(self.access_token, field_id: self.id, organization_id: self.organization_id)
+        @boundary = find_first_active_boundary(boundaries.data)
       end
       return @boundary
     end
@@ -34,5 +33,17 @@ module MyJohnDeere
     def boundary=(val)
       @boundary = val
     end
+
+    private
+      def find_first_active_boundary(possible_boundaries)
+        active_boundaries = possible_boundaries.select { |b| b.active && !b.deleted }
+        if active_boundaries.count > 1 then
+          raise MyJohnDeereError.new("There was more than one boundary in the field, this is currently unexpected")
+        elsif active_boundaries.count == 1 then
+          return active_boundaries.first
+        else
+          return possible_boundaries.first
+        end
+      end
   end
 end
