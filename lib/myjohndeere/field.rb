@@ -11,7 +11,10 @@ module MyJohnDeere
       boundaries = json_object["boundaries"]
       if boundaries && boundaries.length > 0 then
         # If we embed, then we'll need to pass our id
-        self.boundary = Boundary.new(boundaries[0], access_token, self.id)
+        possible_boundaries = boundaries.map { |b_json| Boundary.new(b_json, access_token, self.id) }
+        self.boundary = possible_boundaries.find { |b| b.active && !b.deleted }
+        # Fallback to the first one then
+        self.boundary ||= possible_boundaries.first
       end
     end
 
