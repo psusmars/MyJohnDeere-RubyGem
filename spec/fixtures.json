@@ -1314,7 +1314,7 @@
              "uri": "https://sandboxapi.deere.com/platform/organizations/1234/fields"
           }
        ],
-       "total": 1,
+       "total": 2,
        "values": [
           {
              "name": "Nautilus",

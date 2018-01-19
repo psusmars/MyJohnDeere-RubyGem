@@ -74,9 +74,15 @@ class TestField < Minitest::Test
     stub_request(:get, /organizations\/#{ORGANIZATION_FIXTURE["id"]}\/fields/).
       to_return(status: 200, body: FIXTURE_FOR_LIST.to_json)
 
-    fields = MyJohnDeere::Field.list(default_access_token, count: 1, organization_id: ORGANIZATION_FIXTURE["id"])
+    fields = MyJohnDeere::Field.list(default_access_token, 
+      count: 1, organization_id: ORGANIZATION_FIXTURE["id"])
 
     assert_equal 1, fields.data.length
+    assert fields.has_more?
     assert_equal MyJohnDeere::Field, fields.data[0].class
+
+    fields.next_page!
+
+    assert_equal 1, fields.data
   end
 end
