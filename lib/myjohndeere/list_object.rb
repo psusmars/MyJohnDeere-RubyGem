@@ -1,7 +1,7 @@
 module MyJohnDeere
   class ListObject < Requestable
     OPTION_ATTRIBUTES = [:count, :start, :etag]
-    attr_reader :data, :listable, :total, :options, :last_response_code
+    attr_reader :data, :listable, :total, :options, :last_response_code, :base_resources
     include Enumerable
 
     OPTION_ATTRIBUTES.each do |attribute|
@@ -13,8 +13,9 @@ module MyJohnDeere
       end    
     end
 
-    def initialize(listable, access_token, json_data, last_response_code,
+    def initialize(listable, access_token, json_data, last_response_code, base_resources,
       options: {})
+      @base_resources = base_resources
       @last_response_code = last_response_code
       @options = options
       # Confirm object is listable? 
@@ -40,11 +41,13 @@ module MyJohnDeere
     end
 
     def next_page!()
-      return if !self.has_more?()
-      new_list = @listable.list(self.access_token, 
+      list_options = base_resources.merge({
         count: self.count, 
         start: self.start + self.count,
-        etag: self.etag)
+        etag: self.etag
+      })
+      return if !self.has_more?()
+      new_list = @listable.list(self.access_token, list_options)
       new_list.instance_variables.each do |iv|
         self.instance_variable_set(iv, new_list.instance_variable_get(iv))
       end

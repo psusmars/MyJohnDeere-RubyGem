@@ -21,7 +21,8 @@ module MyJohnDeere
           options[:body][sbp] = options[sbp]
         end
 
-        response = access_token.execute_request(:get, build_resource_base_path!(self.list_resource_path, options), 
+        path, base_resources = build_resource_base_path!(self.list_resource_path, options)
+        response = access_token.execute_request(:get, path, 
           options
         )
         return ListObject.new(
@@ -29,6 +30,7 @@ module MyJohnDeere
           access_token,
           response.data,
           response.code,
+          base_resources,
           options: options.merge(
             etag: response.http_headers[MyJohnDeere::ETAG_HEADER_KEY]
           )
@@ -37,8 +39,9 @@ module MyJohnDeere
 
       def retrieve(access_token, id, options={})
         validate_access_token(access_token)
+        path, = build_resource_base_path!(self.retrieve_resource_path, options)
         response = access_token.execute_request(:get, 
-          "#{build_resource_base_path!(self.retrieve_resource_path, options)}/#{id}",
+          "#{path}/#{id}",
           options)
 
         return new(response.data, access_token)
@@ -60,7 +63,7 @@ module MyJohnDeere
         end
         MyJohnDeere.logger.info("Building resource path: #{resource_path}, with ids: #{base_resources}")
         begin 
-          return resource_path % base_resources
+          return resource_path % base_resources, base_resources
         rescue KeyError
           raise ArgumentError.new("You must specify #{expected_definitions.join(", ")} as part of this request path")
         end
@@ -71,8 +74,9 @@ module MyJohnDeere
       end
 
       def send_create(access_token, body, path_builder_options = {})
+        path, = build_resource_base_path!(self.list_resource_path, path_builder_options)
         response = access_token.execute_request(:post, 
-          build_resource_base_path!(self.list_resource_path, path_builder_options),
+          path,
           body: body
         )
         #{"Content-Type"=>"text/plain", "X-Deere-Handling-Server"=>"ldxtc3", "X-Frame-Options"=>"SAMEORIGIN", "Location"=>"https://sandboxapi.deere.com/platform/mapLayers/e2711205-c5df-445e-aad5-81eaf9090e6c", "X-Deere-Elapsed-Ms"=>"162", "Vary"=>"Accept-Encoding", "Expires"=>"Thu, 14 Sep 2017 15:52:24 GMT", "Cache-Control"=>"max-age=0, no-cache", "Pragma"=>"no-cache", "Date"=>"Thu, 14 Sep 2017 15:52:24 GMT", "Transfer-Encoding"=>"chunked", "Connection"=>"close, Transfer-Encoding"}

@@ -6,7 +6,8 @@ class TestListObject < Minitest::Test
     list = MyJohnDeere::ListObject.new(MyJohnDeere::Organization, 
       default_access_token, 
       {"values" => data},
-      200)
+      200,
+      {})
 
     list.each_with_index do |x, i|
       assert_equal data[i]["id"], x.id
@@ -21,14 +22,14 @@ class TestListObject < Minitest::Test
       default_access_token, {
         "total" => expected_total,
         "values" => Array.new(1, API_FIXTURES["organization"])
-      }, options: {start: 0})
+      }, {}, options: {start: 0})
     assert list.has_more?
 
     list.start = expected_total
     assert !list.has_more?
 
     list = MyJohnDeere::ListObject.new(MyJohnDeere::Organization,
-      default_access_token, {"values" =>[]}, options: {start: 0})
+      default_access_token, {"values" =>[]}, {}, options: {start: 0})
     assert !list.has_more?, "The data is equal to the total"
   end
 
@@ -50,7 +51,7 @@ class TestListObject < Minitest::Test
     test_json = API_FIXTURES["organizations"]
     existing_data = Array.new(test_json["total"]-1, test_json["values"][0])
     list = MyJohnDeere::ListObject.new(MyJohnDeere::Organization, default_access_token, 
-      {"values" => existing_data}, 200, options: {
+      {"values" => existing_data}, 200, {}, options: {
         start: 0, count: existing_data.length, etag: ""})
     assert list.using_etag?
     assert !list.has_more?
@@ -68,7 +69,7 @@ class TestListObject < Minitest::Test
     test_json = API_FIXTURES["organizations"]
     existing_data = (1..(test_json["total"]-1)).to_a
     list = MyJohnDeere::ListObject.new(MyJohnDeere::Organization, default_access_token, 
-      test_json, 200, options: {start: 0,
+      test_json, 200, {}, options: {start: 0,
       count: existing_data.length})
     assert list.has_more?
     assert !list.using_etag?

@@ -51,11 +51,15 @@ class TestRestMethods < Minitest::Test
 
   def test_build_resource_base_path
     resource_path = "blah"
-    assert_equal "blah", MyJohnDeere::Organization.build_resource_base_path!("blah", {})
+    path, base_resources = MyJohnDeere::Organization.build_resource_base_path!("blah", {})
+    assert_equal "blah", path
+    assert_nil base_resources
     resource_path = "blah%{x_id}"
     options = {x: 5, x_id: 1}
-    assert_equal "blah1", MyJohnDeere::Organization.build_resource_base_path!(resource_path, options)
+    path, base_resources = MyJohnDeere::Organization.build_resource_base_path!(resource_path, options)
+    assert_equal "blah1", path
     assert_equal({x: 5}, options)
+    assert_equal({x_id: 1}, base_resources)
 
     assert_raises ArgumentError do
       MyJohnDeere::Organization.build_resource_base_path!(resource_path, {})
