@@ -41,7 +41,7 @@ module MyJohnDeere
     end
 
     def next_page!()
-      list_options = base_resources.merge({
+      list_options = (base_resources || {}).merge({
         count: self.count, 
         start: self.start + self.count,
         etag: self.etag
