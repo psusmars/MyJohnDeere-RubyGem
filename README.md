@@ -1,6 +1,6 @@
-# MyJohnDeere API Library
+# MyJohnDeere/Operations Center API Library
 
-The MyJohnDeere Ruby library provides convenient access to the MyJohnDeere API from applications written in the Ruby language. It includes a pre-defined set of classes for API resources that are available currently from the API. You will need to get access by going to the [JohnDeere Developer page](https://developer.deere.com/#!welcome). The interface utilizes OAUTH 1.0.
+The MyJohnDeere Ruby library provides convenient access to the MyJohnDeere and various Operations Center API from applications written in the Ruby language. It includes a pre-defined set of classes for API resources that are available currently from the API. You will need to get access by going to the [John Deere Developer page](https://developer.deere.com/#!welcome). The interface utilizes OAUTH 1.0.
 
 ## Installation
 
@@ -16,7 +16,7 @@ If you want to build the gem from source:
 
 ### Configuration
 
-The library needs to be configured with your MyJohnDeere account's shared secret & app id. These will be available on the developer page at JohnDeere.
+The library needs to be configured with your MyJohnDeere account's shared secret & app id. These will be available on the developer page at John Deere.
 
 ``` ruby
 require "myjohndeere"
@@ -119,4 +119,4 @@ Run a single test:
 
 ## Disclaimer
 
-This Gem is in no way associated with JohnDeere, and they are in no way associated with it's support, maintenance, or updates.
+This Gem is in no way associated with John Deere, and they are in no way associated with it's support, maintenance, or updates.
