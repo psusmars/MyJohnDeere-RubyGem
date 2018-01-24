@@ -46,7 +46,7 @@ module MyJohnDeere
             "#{self.base_jd_resource}/#{file_resource_id}",
             body: body,
             headers: { 
-              'accept'=> 'application/vnd.deere.axiom.v3+json',
+              'accept'=> JSON_CONTENT_HEADER_VALUE,
               "Content-Type"=>'application/octet-stream' ,
               "Content-Length" => body.bytesize.to_s
             })
