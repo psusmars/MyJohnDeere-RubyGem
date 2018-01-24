@@ -83,6 +83,6 @@ class TestField < Minitest::Test
 
     fields.next_page!
 
-    assert_equal 1, fields.data
+    assert_equal 1, fields.data.count
   end
 end
