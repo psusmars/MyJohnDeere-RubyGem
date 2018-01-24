@@ -63,11 +63,12 @@ class TestField < Minitest::Test
       with(query: {embed: "boundaries"}).
       to_return(status: 200, body: fixture.to_json)
 
-    assert_raises MyJohnDeere::MyJohnDeereError, "At the moment I don't have a use case where this would happen" do
-      field = MyJohnDeere::Field.retrieve(default_access_token, 
-        fixture["id"], organization_id: ORGANIZATION_FIXTURE["id"],
-        body: {embed: "boundaries"})
-    end
+    field = MyJohnDeere::Field.retrieve(default_access_token, 
+      fixture["id"], organization_id: ORGANIZATION_FIXTURE["id"],
+      body: {embed: "boundaries"})
+
+    assert field.boundary.is_a?(MyJohnDeere::Boundary), 
+      "There should be only one boundary since the request returned 2 boundaries with the same id"
   end
 
   def test_list()

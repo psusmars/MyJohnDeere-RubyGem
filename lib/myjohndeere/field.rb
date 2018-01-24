@@ -36,7 +36,8 @@ module MyJohnDeere
 
     private
       def find_first_active_boundary(possible_boundaries)
-        active_boundaries = possible_boundaries.select { |b| b.active && !b.deleted }
+        active_boundaries = possible_boundaries.select { |b| b.active && !b.deleted }.
+          uniq { |b| b.id }
         if active_boundaries.count > 1 then
           raise MyJohnDeereError.new("There was more than one boundary in the field ID: #{self.id}, this is currently unexpected")
         elsif active_boundaries.count == 1 then
