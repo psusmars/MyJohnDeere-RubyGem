@@ -39,7 +39,12 @@ module MyJohnDeere
         active_boundaries = possible_boundaries.select { |b| b.active && !b.deleted }.
           uniq { |b| b.id }
         if active_boundaries.count > 1 then
-          raise MyJohnDeereError.new("There was more than one boundary in the field ID: #{self.id}, this is currently unexpected")
+          if MyJohnDeere.configuration.use_last_active_boundary then
+            MyJohnDeere.logger.info("Multiple boundaries found for field ID: #{self.id}. Using last active")
+            return active_boundaries.last
+          else
+            raise MyJohnDeereError.new("There was more than one boundary in the field ID: #{self.id}, this is currently unexpected")
+          end
         elsif active_boundaries.count == 1 then
           return active_boundaries.first
         else

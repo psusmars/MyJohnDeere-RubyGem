@@ -81,11 +81,16 @@ module MyJohnDeere
 
   class Configuration
     attr_accessor :endpoint
-    attr_writer :shared_secret, :app_id, :contribution_definition_id
+    attr_writer :shared_secret, :app_id, :contribution_definition_id, :use_last_active_boundary
     attr_reader :environment
 
     def log_level=(val)
       @log_level = val
+    end
+
+    def use_last_active_boundary
+      @use_last_active_boundary ||= false
+      return @use_last_active_boundary
     end
 
     def log_level

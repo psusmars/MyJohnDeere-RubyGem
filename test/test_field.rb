@@ -42,6 +42,33 @@ class TestField < Minitest::Test
     assert !field.boundary_unset?
   end
 
+  def test_retrieval_with_multiple_active_boundaries_and_config_change
+    begin
+      fixture = API_FIXTURES["field_with_multiple_active_boundaries_unique_ids"]
+
+      stub_request(:get, /\/organizations\/#{ORGANIZATION_FIXTURE["id"]}\/fields\/#{fixture["id"]}/).
+        with(query: {embed: "boundaries"}).
+        to_return(status: 200, body: fixture.to_json)
+
+      MyJohnDeere.configuration.use_last_active_boundary = false
+
+      assert_raises MyJohnDeere::MyJohnDeereError do
+        MyJohnDeere::Field.retrieve(default_access_token, 
+          fixture["id"], organization_id: ORGANIZATION_FIXTURE["id"],
+          body: {embed: "boundaries"})
+      end
+
+      MyJohnDeere.configuration.use_last_active_boundary = true
+
+      field = MyJohnDeere::Field.retrieve(default_access_token, 
+        fixture["id"], organization_id: ORGANIZATION_FIXTURE["id"],
+        body: {embed: "boundaries"})
+      assert_equal fixture["boundaries"][1]["id"], field.boundary.id
+    ensure
+      MyJohnDeere.configuration.use_last_active_boundary = false
+    end
+  end
+
   def test_retrieval_with_multiple_boundaries
     fixture = API_FIXTURES["field_with_multiple_boundaries"]
 
