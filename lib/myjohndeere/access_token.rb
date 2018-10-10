@@ -26,18 +26,19 @@ module MyJohnDeere
     def initialize(options = {})
       request_token_options = [:request_token_token, :request_token_secret, :verifier_code]
       oauth_token_options = [:oauth_access_token_token, :oauth_access_token_secret]
+      oauth_consumer = self.class.oauth_consumer(debug_output: options[:debug_output])
       if request_token_options.all? { |i| options.key?(i) } then
-        request_token = OAuth::RequestToken.from_hash(self.class.oauth_consumer, {
+        request_token = OAuth::RequestToken.from_hash(oauth_consumer, {
           oauth_token: options[:request_token_token],
           oauth_token_secret: options[:request_token_secret]
         })
         self.oauth_access_token = request_token.get_access_token(oauth_verifier: options[:verifier_code])
       elsif oauth_token_options.all? { |i| options.key?(i) } then
         self.oauth_access_token = OAuth::AccessToken.from_hash(
-          self.class.oauth_consumer, 
+          oauth_consumer, 
           {
             oauth_token: options[:oauth_access_token_token],
-            oauth_token_secret: options[:oauth_access_token_secret]
+            oauth_token_secret: options[:oauth_access_token_secret],
           }
         )
       else
