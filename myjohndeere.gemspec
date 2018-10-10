@@ -13,7 +13,7 @@ spec = Gem::Specification.new do |s|
   s.homepage = 'https://github.com/psusmars/myjohndeere'
   s.license = 'MIT'
 
-  s.add_dependency "oauth", ">= 0.5.3"
+  s.add_runtime_dependency "oauth", "~> 0.5", ">= 0.5.3"
 
   s.files = Dir['lib/**/*.rb']
   s.files = `git ls-files`.split("\n")
