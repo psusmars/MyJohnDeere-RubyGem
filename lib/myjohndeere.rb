@@ -61,7 +61,7 @@ module MyJohnDeere
   JSON_CONTENT_HEADER_VALUE = 'application/vnd.deere.axiom.v3+json'
   ENDPOINTS = {
     sandbox: "https://sandboxapi.deere.com/platform",
-    production: "https://partnerapi.deere.com/platform"
+    production: "https://api.soa-proxy.deere.com/platform"
   }.freeze
   AUTHORIZE_URL = "https://my.deere.com/consentToUseOfData"
   DEFAULT_REQUEST_HEADER = { 'accept'=> JSON_CONTENT_HEADER_VALUE }.freeze
